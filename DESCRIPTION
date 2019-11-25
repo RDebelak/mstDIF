@@ -1,11 +1,20 @@
 Package: mstDIF
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A Collection of Statistical Tests for DIF Detection in Multistage Tests
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: c(person(given = "Rudolf", family = "Debelak", role = c("aut", "cre"), email = "rudolf.debelak@psychologie.uzh.ch"),
+             person(given = "Dries", family = "Debeer", role = "aut",
+             person(given = "Sebastian", family = "Appelbaum", role = "aut"))
+Author: Rudolf Debelak [aut, cre],
+    Dries Debeer [aut],
+    Sebastian Appelbaum [aut]
+Maintainer: Rudolf Debelak <rudolf.debelak@psychologie.uzh.ch>
+Depends: R (>= 3.6.1)
+Imports: mirt (>= 1.31), PP  (>= 0.6.2), strucchange  (>= 1.5-1), Rsctest
+Remotes: ddebeer/Rsctest
+Description: A Collection of Statistical Tests for the Detection of Differential
+    Item Functioning (DIF) in Multistage Tests. Methods entail logistic regression,
+    mstSIB, and various score-based tests.
+License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
