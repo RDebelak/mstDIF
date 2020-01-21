@@ -11,9 +11,9 @@
 #'
 #' Author: Sebastian Appelbaum, with minor changes by Rudolf Debelak
 #'
-#' @param \code{resp} A data frame containing the response matrix. Rows correspond to respondents, columns to items
-#' @param \code{theta} A vector of ability estimates for each respondent.
-#' @param \code{group} A vector indicating the membership to the reference and focal groups. 0 for reference group, 1 for focal group.
+#' @param resp A data frame containing the response matrix. Rows correspond to respondents, columns to items.
+#' @param theta A vector of ability estimates for each respondent.
+#' @param group A vector indicating the membership to the reference and focal groups. 0 for reference group, 1 for focal group.
 #'
 #' @return A data frame where each row corresponds to an item. The columns correspond to the following entries:
 #' \describe{

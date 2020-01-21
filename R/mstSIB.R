@@ -1,20 +1,22 @@
 #' The mstSIB test for MSTs
 #'
-#' This function allows the detection of itemwise DIF using the mstSIB test
+#' This function allows the detection of itemwise DIF using the mstSIB test.
 #'
-#' @param \code{resp} A data frame containing the response matrix. Rows correspond to respondents, columns to items.
-#' @param \code{theta} A vector of ability estimates for each respondent.
-#' @param \code{group} A vector indicating the membership to the reference and focal groups.
-#' @param \code{see} A vector of the standard error of the ability estimates for each respondent.
+#' Author: Mark J. Gierl, with minor changes by Rudolf Debelak
+#'
+#' @param resp A data frame containing the response matrix. Rows correspond to respondents, columns to items.
+#' @param theta A vector of ability estimates for each respondent.
+#' @param group A vector indicating the membership to the reference and focal groups.
+#' @param see A vector of the standard error of the ability estimates for each respondent.
 #'
 #' @return A matrix where each row corresponds to an item. The columns correspond to the following entries:
 #' \describe{
-#'   \item{\code{Beta}}{The estimated weighted ability difference between the focal and reference groups.}
-#'   \item{\code{Vars}}{The estimation error of the weighted ability difference between the focal and reference groups.}
-#'   \item{\code{N_R}}{The number of respondents in the reference group.}
-#'   \item{\code{N_F}}{The number of respondents in the focal group.}
-#'   \item{\code{NCell}}{The number of cells for estimating the overall ability difference between the focal and reference groups.}
-#'   \item{\code{p_value}}{The p-value of the null hypothesis that the ability difference between the focal and reference
+#'   \item{Beta}{The estimated weighted ability difference between the focal and reference groups.}
+#'   \item{Vars}{The estimation error of the weighted ability difference between the focal and reference groups.}
+#'   \item{N_R}{The number of respondents in the reference group.}
+#'   \item{N_F}{The number of respondents in the focal group.}
+#'   \item{NCell}{The number of cells for estimating the overall ability difference between the focal and reference groups.}
+#'   \item{p_value}{The p-value of the null hypothesis that the ability difference between the focal and reference
 #'   groups is 0.}
 #'   }
 #'
