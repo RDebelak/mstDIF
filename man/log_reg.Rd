@@ -4,14 +4,16 @@
 \alias{log_reg}
 \title{A logistic regression DIF test for MSTs}
 \usage{
-log_reg(resp, theta, group)
+log_reg(resp, DIF_covariate, theta = NULL, ...)
 }
 \arguments{
 \item{resp}{A data frame containing the response matrix. Rows correspond to respondents, columns to items.}
 
+\item{DIF_covariate}{A factor indicating the membership to the reference and focal groups.}
+
 \item{theta}{A vector of ability estimates for each respondent.}
 
-\item{group}{A vector indicating the membership to the reference and focal groups. 0 for reference group, 1 for focal group.}
+\item{...}{other argements to be ignored.}
 }
 \value{
 A data frame where each row corresponds to an item. The columns correspond to the following entries:
@@ -40,5 +42,5 @@ also includes an interaction effect. Three model comparisons are carried out (Mo
 based on two criteria: The comparison of the Nagelkerke R squared values, and the p-values of a likelihood ratio test.
 }
 \details{
-Author: Sebastian Appelbaum, with minor changes by Rudolf Debelak
+Author: Sebastian Appelbaum, with minor changes by Rudolf Debelak and Dries Debeer
 }

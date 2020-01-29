@@ -2,34 +2,58 @@
 % Please edit documentation in R/mstDIF.R
 \name{mstDIF}
 \alias{mstDIF}
+\alias{mstDIF.default}
+\alias{mstDIF.AllModelClass}
+\alias{mstDIF.dRm}
 \title{A general function to detect differential item functioning (DIF) in multistage tests (MSTs)}
 \usage{
-mstDIF(resp = NULL, mirt_object = NULL, order_by, method, ...)
+mstDIF(resp, ...)
+
+\method{mstDIF}{default}(resp, DIF_covariate, method, theta = NULL, see = NULL, ...)
+
+\method{mstDIF}{AllModelClass}(
+  AllModelClass,
+  DIF_covariate,
+  method,
+  theta = NULL,
+  see = NULL,
+  theta_method = "WLE",
+  ...
+)
+
+\method{mstDIF}{dRm}(dRm_object, DIF_covariate, method, ...)
 }
 \arguments{
-\item{resp}{A data frame containing the response matrix. Rows correspond to respondents, columns to items.
-Not required for analytical score-based tests.}
+\item{resp}{A data frame or matrix containing the response matrix. Rows correspond to respondents, columns to items.}
 
-\item{mirt_object}{A SingleGroup or Multigroup object as it is returned by mirt. Only required for
-analytical score-based tests.}
+\item{...}{additional, test-specific arguments}
 
-\item{order_by}{A vector of ability estimates for each respondent.}
+\item{DIF_covariate}{A vector of ability estimates for each respondent.}
 
 \item{method}{A character value indicating the DIF test that should be used. Possible values are "logreg"
 (Logistic regression), "mstsib" (mstSIB), "bootstrap" (score-based Bootstrap test), "permutation" (score-based)
 permutation test) and "analytical" (analytical score-based test)}
 
-\item{...}{additional, test-specific arguments}
+\item{theta}{documentation missing}
+
+\item{see}{documentation missing}
+
+\item{AllModelClass}{A SingleGroup or Multigroup object as returned by mirt.}
+
+\item{theta_method}{documentation missing}
+
+\item{dRm_object}{A Rm objcect as returned by the RM function in eRm.}
 }
 \value{
 A list with the following elements:
 \describe{
-  \item{\code{p_values}}{A data frame where each row corresponds to an item. The first column corresponds to the
-   item numbers, the second column to the p-value of an overall DIF test for ths corresponding item.}
   \item{\code{resp}}{The response matrix as a data frame.}
-  \item{\code{order_by}}{The person covariate tested for DIF.}
-  \item{\code{method}}{The selected DIF test.}
-  \item{\code{complete_output}}{The complete output of the selected DIF test.
+  \item{\code{method}}{The used DIF detection method.}
+  \item{\code{test}}{The used test or statistic.}
+  \item{\code{DIF_covariate}}{The person covariate tested for DIF.}
+  \item{\code{DIF_test}}{A list with the DIF-test results.}
+  \item{\code{call}}{The function call.}
+  \item{\code{method_results}}{The complete output of the selected DIF test.
   Differs depending on the selection.}
 }
 }
@@ -42,3 +66,12 @@ differs with regard to the selected DIF test.
 \details{
 Author: Rudolf Debelak
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: Default mstDIF method
+
+\item \code{AllModelClass}: mstDIF method for mirt-objects
+
+\item \code{dRm}: mstDIF method for dRm-objects
+}}
+

@@ -4,16 +4,33 @@
 \alias{mstSIB}
 \title{The mstSIB test for MSTs}
 \usage{
-mstSIB(resp, theta, group, see)
+mstSIB(
+  resp,
+  DIF_covariate,
+  theta = NULL,
+  see = NULL,
+  cellmin = 3,
+  pctmin = 0.9,
+  NCell = 80,
+  ...
+)
 }
 \arguments{
 \item{resp}{A data frame containing the response matrix. Rows correspond to respondents, columns to items.}
 
+\item{DIF_covariate}{A vector indicating the membership to the reference (0) and focal (1) groups.}
+
 \item{theta}{A vector of ability estimates for each respondent.}
 
-\item{group}{A vector indicating the membership to the reference and focal groups.}
-
 \item{see}{A vector of the standard error of the ability estimates for each respondent.}
+
+\item{cellmin}{documentation missing}
+
+\item{pctmin}{documentation missing}
+
+\item{NCell}{documentation missing}
+
+\item{...}{other argements to be ignored.}
 }
 \value{
 A matrix where each row corresponds to an item. The columns correspond to the following entries:
@@ -31,5 +48,5 @@ A matrix where each row corresponds to an item. The columns correspond to the fo
 This function allows the detection of itemwise DIF using the mstSIB test.
 }
 \details{
-Author: Mark J. Gierl, with minor changes by Rudolf Debelak
+Author: Mark J. Gierl, with minor changes by Rudolf Debelak and Dries Debeer
 }
