@@ -4,7 +4,7 @@
 \alias{log_reg}
 \title{A logistic regression DIF test for MSTs}
 \usage{
-log_reg(resp, DIF_covariate, theta = NULL, ...)
+log_reg(resp, DIF_covariate, theta = NULL)
 }
 \arguments{
 \item{resp}{A data frame containing the response matrix. Rows correspond to respondents, columns to items.}
@@ -12,8 +12,6 @@ log_reg(resp, DIF_covariate, theta = NULL, ...)
 \item{DIF_covariate}{A factor indicating the membership to the reference and focal groups.}
 
 \item{theta}{A vector of ability estimates for each respondent.}
-
-\item{...}{other argements to be ignored.}
 }
 \value{
 A data frame where each row corresponds to an item. The columns correspond to the following entries:

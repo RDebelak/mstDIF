@@ -53,7 +53,7 @@ summary.mstDIF <- function(object, DIF_type = "overall",
 
   # match DIF_type with arguments
   DIF_type_choices <- c("overall", "uniform",
-                       "non-uniform", "all")
+                        "non-uniform", "all")
   DIF_type <- match.arg(DIF_type, DIF_type_choices, several.ok = TRUE)
 
   if("all" %in% DIF_type) DIF_type <- names(object$DIF_test)

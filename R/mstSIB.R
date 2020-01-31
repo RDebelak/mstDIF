@@ -11,7 +11,6 @@
 #' @param cellmin documentation missing
 #' @param pctmin documentation missing
 #' @param NCell documentation missing
-#' @param ... other argements to be ignored.
 #'
 #' @return A matrix where each row corresponds to an item. The columns correspond to the following entries:
 #' \describe{
@@ -28,7 +27,7 @@
 #' @export
 
 mstSIB <- function(resp, DIF_covariate, theta = NULL, see = NULL,
-                   cellmin = 3, pctmin = .9, NCell = 80, ...){
+                   cellmin = 3, pctmin = .9, NCell = 80){
 
   # get call
   call <- match.call()
@@ -67,8 +66,8 @@ mstSIB <- function(resp, DIF_covariate, theta = NULL, see = NULL,
   colnames(BetaOut) <- c("stat", "SE", "N_R", "N_F", "NCell", "p_value")
   ##Start here
   for(inum in 4:dim(Sif)[2]){
-    Rif <- Sif[(Sif[, 3] == 0) * (Sif[, inum] != 9) == 1, ]
-    Fif <- Sif[(Sif[, 3] == 1) * (Sif[, inum] != 9) == 1, ]
+    Rif <- Sif[Sif[, 3] == 0 & !is.na(Sif[, inum]), ]
+    Fif <- Sif[Sif[, 3] == 1 & !is.na(Sif[, inum]), ]
     if(nrow(Rif) > 0 & nrow(Fif) > 0){
       RSR <- Rif[, inum]
       FSR <- Fif[, inum]

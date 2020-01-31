@@ -19,3 +19,30 @@ get_it_pars <- function(pars){
                                   fixed = TRUE, value = TRUE),
                              fixed = TRUE))
 }
+
+# a function that removes the unused arguments from a call
+clean_call <- function(call, warning = TRUE) {
+
+  # get the function
+  fun <- call[[1]]
+
+  names_call <- names(call)
+  which_unused <- which(!names_call %in% names(formals(eval(fun))))
+
+  # warning message:
+  if(length(which_unused[-1]) == 0){
+    return(call)
+  } else {
+    if(warning)
+      warning("The following objects are ignored by ", fun, ": \n",
+              paste(names_call[which_unused][-1],
+                    call[which_unused][-1], sep = " = ", collapse = "\n"),
+              call. = FALSE, immediate. = TRUE)
+
+    # evaluate function
+    return(call[-which_unused[-1]])
+  }
+}
+
+
+

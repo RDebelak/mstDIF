@@ -1,5 +1,7 @@
 ### Testcode
 library(mstDIF)
+library(Rsctest)
+library(scDIFtest)
 library(eRm)
 library(mirt)
 
@@ -70,7 +72,7 @@ summary(test7, DIF_type = c("overall", "uniform"))
 
 ### Test 8: mstDIF function with bootstrap option
 test8 <- mstDIF(resp = resp, DIF_covariate = group, method = "bootstrap",
-                a = rep(1,times = i), b = beta, decorrelate = FALSE)
+                a = rep(1,times = i), b = beta, decorrelate = FALSE, theta = theta_est, nSamples = 100)
 
 test8
 summary(test8)
@@ -79,7 +81,7 @@ summary(test8, DIF_type = "all")
 summary(test8, DIF_type = c("overall", "uniform"))
 
 ### Test 9: mstDIF function with permutation option
-test9 <- mstDIF(resp = resp, DIF_covariate = group, method = "permutation",
+test9 <- mstDIF(resp = resp,  metho = "permutation", DIF_covariate = group,
                 b = beta, decorrelate = FALSE,
                 theta = theta_est)
 
@@ -115,7 +117,7 @@ test14
 test15 <- mstDIF(RM, DIF_covariate = group, method = "permutation", nSamples = 500)
 test15
 
-test15b <- mstDIF(RM, DIF_covariate = group, method = "bootstrap", nSamples = 500)
+test15b <- mstDIF(RM, DIF_covariate = group, method = "bootstrap", nSamples = 50)
 test15b
 
 test16 <- mstDIF(RM, DIF_covariate = group, method = "mstsib")

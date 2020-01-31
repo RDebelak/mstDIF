@@ -14,7 +14,6 @@
 #' @param resp A data frame containing the response matrix. Rows correspond to respondents, columns to items.
 #' @param DIF_covariate A factor indicating the membership to the reference and focal groups.
 #' @param theta A vector of ability estimates for each respondent.
-#' @param ... other argements to be ignored.
 #'
 #' @return A data frame where each row corresponds to an item. The columns correspond to the following entries:
 #' \describe{
@@ -33,7 +32,7 @@
 #'
 #'
 #' @export
-log_reg <- function(resp, DIF_covariate, theta = NULL, ...){
+log_reg <- function(resp, DIF_covariate, theta = NULL){
 
   # get call
   call <- match.call()

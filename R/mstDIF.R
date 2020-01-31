@@ -12,8 +12,7 @@
 #' @param method A character value indicating the DIF test that should be used. Possible values are "logreg"
 #'  (Logistic regression), "mstsib" (mstSIB), "bootstrap" (score-based Bootstrap test), "permutation" (score-based)
 #'  permutation test) and "analytical" (analytical score-based test)
-#' @param AllModelClass A SingleGroup or Multigroup object as returned by mirt.
-#' @param dRm_object A Rm objcect as returned by the RM function in eRm.
+#' @param object A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.
 #' @param theta documentation missing
 #' @param see documentation missing
 #' @param theta_method documentation missing
@@ -36,7 +35,7 @@
 #' @importFrom stats coef
 #'
 #' @export
-mstDIF  <- function(resp, ...)
+mstDIF  <- function(resp, DIF_covariate, method, ...)
   UseMethod("mstDIF")
 
 #' @describeIn mstDIF Default mstDIF method
@@ -44,8 +43,18 @@ mstDIF.default <- function(resp, DIF_covariate, method,
                            theta = NULL, see = NULL, ...){
   call <- match.call()
 
+  nItem <- dim(resp)[2]
+  # give column names if not given
+  colnames(resp) <- 'if'(is.null(colnames(resp)),
+                         sprintf(paste("it%0", nchar(nItem),
+                                       "d", sep=''),
+                                 seq_len(nItem)),
+                         colnames(resp))
+
   if (method == "logreg") {
-    results <- log_reg(resp, DIF_covariate, theta)
+    newCall <- call[-4]  # remove method argument
+    newCall[[1]] <- quote(log_reg)
+    results <- eval(clean_call(newCall), envir = parent.frame())
     res <- results$results
 
     out <- list(
@@ -56,19 +65,21 @@ mstDIF.default <- function(resp, DIF_covariate, method,
       DIF_test =
         list(overall = res[c("N", "stat", "p_value", "eff_size")],
              uniform = data.frame(N = res$N,
-                             stat = res$stat_u,
-                             p_value = res$p_value_u,
-                             eff_size = res$eff_size_u),
+                                  stat = res$stat_u,
+                                  p_value = res$p_value_u,
+                                  eff_size = res$eff_size_u),
              'non-uniform' = data.frame(N = res$N,
-                                   stat = res$stat_nu,
-                                   p_value = res$p_value_nu,
-                                   eff_size = res$eff_size_nu)),
+                                        stat = res$stat_nu,
+                                        p_value = res$p_value_nu,
+                                        eff_size = res$eff_size_nu)),
       call = call,
       method_results = results)
   }
 
   if (method == "mstsib") {
-    results <- mstSIB(resp, DIF_covariate, theta, see, ...)
+    newCall <- call[-4]  # remove method argument
+    newCall[[1]] <- quote(mstSIB)
+    results <- eval(clean_call(newCall), envir = parent.frame())
     res <- results$results
 
     out <- list(
@@ -77,15 +88,20 @@ mstDIF.default <- function(resp, DIF_covariate, method,
       test = results$test,
       DIF_covariate = as.character(deparse(call$DIF_covariate)),
       DIF_test =
-        list(overall = res[c("stat", "SE", "p_value", "N_R", "N_F", "NCell")]),
+        list(overall = data.frame(N = res$N_R + res$N_F,
+                                  res[c("stat", "SE", "p_value",
+                                        "N_R", "N_F", "NCell")],
+                                  stringsAsFactors = FALSE)),
       call = call,
       method_results = results)
   }
 
   if (method == "bootstrap") {
-    results <- bootstrap_sctest(resp = resp, DIF_covariate = DIF_covariate,
-                                theta = theta, ...)
-    DIF_covariate_name <- names(results$DIF_covariate)
+    newCall <- call[-4]  # remove method argument
+    newCall[[1]] <- quote(bootstrap_sctest)
+    newCall$item_selection <- NULL
+    results <- eval(clean_call(newCall), envir = parent.frame())
+    DIF_covariate_name <- names(results$DIF_covariate)[1]
 
     out <- list(
       resp = results$resp,
@@ -94,16 +110,21 @@ mstDIF.default <- function(resp, DIF_covariate, method,
       test = results$DIF_covariate[[DIF_covariate_name]]$statistic$name,
       DIF_covariate = DIF_covariate_name,
       DIF_test =
-        list(overall = data.frame(stat = results$stat[DIF_covariate_name,],
-                                  p_value = results$p[DIF_covariate_name,])),
+        list(overall = data.frame(N = apply(results$resp, 2,
+                                            function(row) sum(!is.na(row))),
+                                  stat = results$stat[DIF_covariate_name,],
+                                  p_value = results$p[DIF_covariate_name,],
+                                  stringsAsFactors = FALSE)),
       theta = theta,
       call = call,
       method_results = results)
   }
 
   if (method == "permutation") {
-    results <- permutation_sctest(resp = resp, DIF_covariate = DIF_covariate,
-                                  theta = theta, ...)
+    newCall <- call[-4]  # remove method argument
+    newCall[[1]] <- quote(permutation_sctest)
+    newCall$item_selection <- NULL
+    results <- eval(clean_call(newCall), envir = parent.frame())
     DIF_covariate_name <- names(results$DIF_covariate)[1]
 
     out <- list(
@@ -113,8 +134,11 @@ mstDIF.default <- function(resp, DIF_covariate, method,
       test = results$DIF_covariate[[DIF_covariate_name]]$statistic$name,
       DIF_covariate = DIF_covariate_name,
       DIF_test =
-        list(overall = data.frame(stat = results$stat[DIF_covariate_name,],
-                                  p_value = results$p[DIF_covariate_name,])),
+        list(overall = data.frame(N = apply(results$resp, 2,
+                                            function(row) sum(!is.na(row))),
+                                  stat = results$stat[DIF_covariate_name,],
+                                  p_value = results$p[DIF_covariate_name,],
+                                  stringsAsFactors = FALSE)),
       theta = theta,
       call = call,
       method_results = results)
@@ -122,7 +146,7 @@ mstDIF.default <- function(resp, DIF_covariate, method,
 
   if (method == "analytical") {
     stop("DIF detection using the assymptotic score based tests is \n\t",
-          "only implemented for mirt-objects of class 'AllModelClass'.")
+         "only implemented for mirt-objects of class 'AllModelClass'.")
 
   }
   class(out) <- "mstDIF"
@@ -132,81 +156,101 @@ mstDIF.default <- function(resp, DIF_covariate, method,
 
 
 #' @describeIn mstDIF mstDIF method for mirt-objects
-mstDIF.AllModelClass <- function(AllModelClass, DIF_covariate, method,
+mstDIF.AllModelClass <- function(object, DIF_covariate, method,
                                  theta = NULL, see = NULL,
                                  theta_method = "WLE", ...){
 
   call <- match.call()
+  # get the data
+  resp <- object@Data$data
 
   if(method == "analytical") {
-    results <- scDIFtest(AllModelClass, DIF_covariate, ...)
+    newCall <- call[-4]  # remove method argument
+    newCall[[1]] <- quote(scDIFtest)
+    newCall$item_selection <- NULL
+    results <- eval(clean_call(newCall), envir = parent.frame())
     summary <- summary(results)
     out <-  list(
-      resp = AllModelClass@Data$data,
+      resp = resp,
       method = "Assymptotic score-based DIF test",
       test = results$info$test_info$stat_name,
       DIF_covariate = as.character(deparse(call$DIF_covariate)),
       DIF_test =
-        list(overall = summary[c("stat", "p_value")]),
+        list(overall = data.frame(N = apply(resp, 2,
+                                            function(row) sum(!is.na(row))),
+                                  summary[c("stat", "p_value")],
+                                  stringsAsFactors = FALSE)),
       theta = theta,
       call = call,
       method_results = results)
     class(out) <- "mstDIF"
     out
   } else {
-    # get the data
-    resp <- AllModelClass@Data$data
-
+    newCall <- call[-2]  # remove object argument
     # get theta
-    if(is.null(theta)){
-      wle_est <- mirt::fscores(AllModelClass, method = theta_method,
-                         full.scores.SE = TRUE)
-      theta <- wle_est[,1]
+    if(is.null(newCall[["theta"]])){
+      wle_est <- mirt::fscores(object, method = theta_method,
+                               full.scores.SE = TRUE)
+      newCall$theta <- as.numeric(wle_est[,1])
 
       # get see if needed
-      if(method == "mstsib" & is.null(see))
-        see <- wle_est[,2]
+      if(method == "mstsib" & is.null(newCall[["see"]]))
+        newCall$see <- wle_est[,2]
     }
 
     # get the item parameters
     if(method %in% c("boostrap", "permutation")) {
-      if(any(!mirt::extract.mirt(AllModelClass, "itemtype") %in% c("Rasch", "2PL", "3PL")))
+      if(any(!mirt::extract.mirt(object, "itemtype") %in% c("Rasch", "2PL", "3PL")))
         stop(paste0("The ", method, " DIF method only works for 1PL,  2PL, and 3PL items."))
-      it_pars <- extract_it_pars(AllModelClass)
-      a <- it_pars$a
-      b <- it_pars$b
-      c <- it_pars$u
+      it_pars <- extract_it_pars(object)
+      newCall$a <- it_pars$a
+      newCall$b <- it_pars$b
+      newCall$c <- it_pars$u
     }
 
-    out <- mstDIF(resp, DIF_covariate, method, theta = theta,
-                  see = see, a = a, b = b, c = c, ...)
+    newCall[[1]] <- quote(mstDIF.default)
+    newCall$resp <- resp
+    out <- eval(newCall)
+    out$call <- call
   }
   return(out)
 
 }
 
 #' @describeIn mstDIF mstDIF method for dRm-objects
-mstDIF.dRm <- function(dRm_object, DIF_covariate, method, ...){
+mstDIF.dRm <- function(object, DIF_covariate, method,
+                       theta = NULL, see = NULL, ...){
+
+  call <- match.call()
+  newCall <- call[-2]  # remove object argument
+
   # get the data
-  resp <- dRm_object$X
-  if(is.null(theta)){
-    ppar <- eRm::person.parameter(dRm_object)
-    theta <- ppar$theta.table$`Person Parameter`
-    if(method == "mstsib" & is.null(see)){
+  resp <- object$X
+
+  # get theta
+  if(is.null(newCall[["theta"]])){
+    ppar <- eRm::person.parameter(object)
+    newCall$theta <- ppar$theta.table$`Person Parameter`
+    if(method == "mstsib" & is.null(newCall[["see"]])){
       # get number of all 0 or all 1 responses
       exclude <- ppar$pers.ex
-      if(length(exclude == 0)){
-        see <- ppar$se.theta[[1]]
+      if(length(exclude) == 0){
+        newCall$see <- ppar$se.theta[[1]]
       } else {
-        see <- rep(NA, length(theta))
-        see[-ppar$pers.ex] <- ppar$se.theta[[1]]
+        newCall$see <- rep(NA, length(newCall$theta))
+        newCall$see[-ppar$pers.ex] <- ppar$se.theta[[1]]
       }
     }
   }
-  b <- - coef(dRm_object)
 
-  mstDIF(resp, DIF_covariate, method, theta = theta, see = see,
-         b = b,  ...)
+  if(method %in% c("bootstrap", "permutation"))
+    newCall$b <- - coef(object)
+
+  newCall[[1]] <- quote(mstDIF.default)
+  newCall$resp <- resp
+  out <- eval(newCall)
+  out$call <- call
+  out
 }
 
 

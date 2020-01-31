@@ -7,12 +7,12 @@
 \alias{mstDIF.dRm}
 \title{A general function to detect differential item functioning (DIF) in multistage tests (MSTs)}
 \usage{
-mstDIF(resp, ...)
+mstDIF(resp, DIF_covariate, method, ...)
 
 \method{mstDIF}{default}(resp, DIF_covariate, method, theta = NULL, see = NULL, ...)
 
 \method{mstDIF}{AllModelClass}(
-  AllModelClass,
+  object,
   DIF_covariate,
   method,
   theta = NULL,
@@ -21,12 +21,10 @@ mstDIF(resp, ...)
   ...
 )
 
-\method{mstDIF}{dRm}(dRm_object, DIF_covariate, method, ...)
+\method{mstDIF}{dRm}(object, DIF_covariate, method, theta = NULL, see = NULL, ...)
 }
 \arguments{
 \item{resp}{A data frame or matrix containing the response matrix. Rows correspond to respondents, columns to items.}
-
-\item{...}{additional, test-specific arguments}
 
 \item{DIF_covariate}{A vector of ability estimates for each respondent.}
 
@@ -34,15 +32,15 @@ mstDIF(resp, ...)
 (Logistic regression), "mstsib" (mstSIB), "bootstrap" (score-based Bootstrap test), "permutation" (score-based)
 permutation test) and "analytical" (analytical score-based test)}
 
+\item{...}{additional, test-specific arguments}
+
 \item{theta}{documentation missing}
 
 \item{see}{documentation missing}
 
-\item{AllModelClass}{A SingleGroup or Multigroup object as returned by mirt.}
+\item{object}{A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.}
 
 \item{theta_method}{documentation missing}
-
-\item{dRm_object}{A Rm objcect as returned by the RM function in eRm.}
 }
 \value{
 A list with the following elements:

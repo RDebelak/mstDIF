@@ -11,8 +11,7 @@ mstSIB(
   see = NULL,
   cellmin = 3,
   pctmin = 0.9,
-  NCell = 80,
-  ...
+  NCell = 80
 )
 }
 \arguments{
@@ -29,8 +28,6 @@ mstSIB(
 \item{pctmin}{documentation missing}
 
 \item{NCell}{documentation missing}
-
-\item{...}{other argements to be ignored.}
 }
 \value{
 A matrix where each row corresponds to an item. The columns correspond to the following entries:
