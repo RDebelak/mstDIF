@@ -9,11 +9,11 @@
 #' also includes an interaction effect. Three model comparisons are carried out (Models 1/2, Models 1/3, Models 2/3)
 #' based on two criteria: The comparison of the Nagelkerke R squared values, and the p-values of a likelihood ratio test.
 #'
-#' Author: Sebastian Appelbaum, with minor changes by Rudolf Debelak
+#' Author: Sebastian Appelbaum, with minor changes by Rudolf Debelak and Dries Debeer
 #'
 #' @param resp A data frame containing the response matrix. Rows correspond to respondents, columns to items.
+#' @param DIF_covariate A factor indicating the membership to the reference and focal groups.
 #' @param theta A vector of ability estimates for each respondent.
-#' @param group A vector indicating the membership to the reference and focal groups. 0 for reference group, 1 for focal group.
 #'
 #' @return A data frame where each row corresponds to an item. The columns correspond to the following entries:
 #' \describe{
@@ -30,54 +30,102 @@
 #'   \item{\code{CDIF_Delta_NagelkerkeR2}}{The difference of the Nagelkerke R squared values for Model 2 and Model 1.}
 #' }
 #'
+#'
 #' @export
-log_reg <- function(resp, theta, group){
+log_reg <- function(resp, DIF_covariate, theta = NULL){
 
+  # get call
+  call <- match.call()
+
+  # a theta-argument is required
+  if(is.null(theta)) stop("'theta'-argument is missing. Include a vector with the estimated 'theta'-values.", call. = FALSE)
+
+  # get the DIF_covariate name
+  DIF_covariate_name <- as.character(deparse(call$DIF_covariate))
+
+  if(!is.factor(DIF_covariate)){
+    DIF_covariate <- as.factor(DIF_covariate)
+    message(paste0("For the DIF analysis, '", DIF_covariate_name,
+                   "' was transformed into a factor."))
+  }
+
+  # Helper functions
   R2 <- function(m, n) 1 - (exp(-m$null.deviance/2 + m$deviance/2))^(2/n)
   R2max <- function(m, n) 1 - (exp(-m$null.deviance/2))^(2/n)
-  R2DIF <- function(m, n) R2(m, n)/R2max(m, n)
+  R2DIF <- function(m, n) R2(m, n)/R2max(m, n)              # NagelkerkeR2
+  R2DIF2 <- function(m1, m2, n) R2DIF(m2, n) - R2DIF(m1, n) # Delta_NagelkerkeR2
 
-  d <- as.data.frame(cbind(theta, group, resp))
-  aux <- matrix(NA, nrow = ncol(resp), ncol = 10)
-  rownames(aux) <- names(resp)
-  colnames(aux) <- c("N",
-                     "overall_chi_sq", "overall_p_value", "Delta_NagelkerkeR2",
-                     "UDIF_chi_sq", "UDIF_p_value", "UDIF_Delta_NagelkerkeR2",
-                     "CDIF_chi_sq", "CDIF_p_value", "CDIF_Delta_NagelkerkeR2")
-  C_matrix <- matrix(c(0, 0, 0, 0, 1, 0, 0, 1),nrow = 2)
-  for (i in 1:ncol(resp)) {
-    glm_2 <- glm(formula = as.formula(paste0(names(resp)[i]," ~ theta*group")), family = binomial, data = d)
-    glm_1 <- glm(formula = as.formula(paste0(names(resp)[i]," ~ theta+group")), family = binomial, data = d)
-    glm_0 <- glm(formula = as.formula(paste0(names(resp)[i]," ~ theta")), family = binomial, data = d)
-    test_udif <- anova(glm_0, glm_1, test = "LRT")
-    test_cdif <- anova(glm_1, glm_2, test = "LRT")
-    test_dif <- anova(glm_0, glm_2, test = "LRT")
+  # function to compute the log-reg-DIF-test for one item
+  log_reg_DIF_1_item <- function(itemname, data){
 
-    sum_glm_1 <- summary(glm_2)$coef
-    if (dim(sum_glm_1)[1]==4){
-      aux[i,1] <- summary(glm_2)$ df.null + 1
-      aux[i,2] <- test_dif$Deviance[2]
-      aux[i,3] <- test_dif$`Pr(>Chi)`[2]
-      aux[i,4] <- R2DIF(glm_2, aux[i,1]) - R2DIF(glm_0, aux[i,1])
-      aux[i,5] <- test_udif$Deviance[2]
-      aux[i,6] <- test_udif$`Pr(>Chi)`[2]
-      aux[i,7] <- R2DIF(glm_1, aux[i,1]) - R2DIF(glm_0, aux[i,1])
-      aux[i,8] <- test_udif$Deviance[2]
-      aux[i,9] <- test_udif$`Pr(>Chi)`[2]
-      aux[i,10] <- R2DIF(glm_2, aux[i,1]) - R2DIF(glm_1, aux[i,1])
-      } else {
-      aux[i,1] <- summary(glm_1)$ df.null +1
-      aux[i,2] <- NA
-      aux[i,3] <- NA
-      aux[i,4] <- NA
-      aux[i,5] <- NA
-      aux[i,6] <- NA
-      aux[i,7] <- NA
-      aux[i,8] <- NA
-      aux[i,9] <- NA
-      aux[i,10] <- NA
-      }
+    glm_2 <- stats::glm(
+      stats::as.formula(paste0(itemname," ~ theta * DIF_covariate")),
+      family = stats::binomial, data = d)
+
+    # number of observations in test
+    N <- summary(glm_2)$df.null + 1
+
+
+    # does it make sense to test for DIF?
+    if (dim(summary(glm_2)$coef)[1] == 4){
+      glm_1 <- stats::glm(
+        stats::as.formula(paste0(itemname," ~ theta + DIF_covariate")),
+        family = stats::binomial, data = d)
+      glm_0 <- stats::glm(
+        stats::as.formula(paste0(itemname," ~ theta")),
+        family = stats::binomial, data = d)
+      test_udif <- stats::anova(glm_0, glm_1, test = "LRT")
+      test_cdif <- stats::anova(glm_1, glm_2, test = "LRT")
+      test_dif <- stats::anova(glm_0, glm_2, test = "LRT")
+
+      return(data.frame(item = itemname,
+                        N = N,
+                        stat = test_dif$Deviance[2],
+                        p_value = test_dif$`Pr(>Chi)`[2],
+                        eff_size = R2DIF2(glm_0, glm_2, N),
+                        stat_u = test_udif$Deviance[2],
+                        p_value_u = test_udif$`Pr(>Chi)`[2],
+                        eff_size_u = R2DIF2(glm_0, glm_1, N),
+                        stat_nu = test_dif$Deviance[2],
+                        p_value_nu = test_dif$`Pr(>Chi)`[2],
+                        eff_size_nu = R2DIF2(glm_1, glm_2, N),
+                        stringsAsFactors = FALSE))
+
+    } else {
+      return(data.frame(item = itemname,
+                        N = N,
+                        stat = NA,
+                        p_value = NA,
+                        eff_size = NA,
+                        stat_u = NA,
+                        p_value_u = NA,
+                        eff_size_u = NA,
+                        stat_nu = NA,
+                        p_value_nu = NA,
+                        eff_size_nu = NA,
+                        stringsAsFactors = FALSE))
+    }
   }
-  aux <- as.data.frame(aux)
-  aux
+
+  # get number of items
+  nItem <- ncol(resp)
+
+  # get/set item names
+  colnames(resp) <- itemnames <- 'if'(is.null(colnames(resp)),
+                                      sprintf(paste("it%0", nchar(nItem),
+                                                    "d", sep=''),
+                                              seq_len(nItem)),
+                                      colnames(resp))
+
+  # combine estimated theta's with grouping variable and responses
+  d <- as.data.frame(cbind(theta, DIF_covariate, resp))
+
+  #  C_matrix <- matrix(c(0, 0, 0, 0, 1, 0, 0, 1),nrow = 2)
+
+  # apply the test for one item to all the items
+  res <- do.call(rbind, lapply(itemnames, log_reg_DIF_1_item, data = d))
+  return(list(resp = resp,
+              DIF_covariate = DIF_covariate_name,
+              test = "Likelihood Ratio Test",
+              results = res))
 }
