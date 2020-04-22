@@ -120,8 +120,6 @@ log_reg <- function(resp, DIF_covariate, theta = NULL){
   # combine estimated theta's with grouping variable and responses
   d <- as.data.frame(cbind(theta, DIF_covariate, resp))
 
-  #  C_matrix <- matrix(c(0, 0, 0, 0, 1, 0, 0, 1),nrow = 2)
-
   # apply the test for one item to all the items
   res <- do.call(rbind, lapply(itemnames, log_reg_DIF_1_item, data = d))
   return(list(resp = resp,

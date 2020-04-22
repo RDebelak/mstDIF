@@ -8,9 +8,9 @@
 #' @param DIF_covariate A vector indicating the membership to the reference (0) and focal (1) groups.
 #' @param theta A vector of ability estimates for each respondent.
 #' @param see A vector of the standard error of the ability estimates for each respondent.
-#' @param cellmin documentation missing
-#' @param pctmin documentation missing
-#' @param NCell documentation missing
+#' @param NCell The initial number of cells for estimating the overall ability difference between the focal and reference groups.
+#' @param cellmin Minimum number of respondents per cell for the focal and reference group. Cells with fewer respondents are discarded.
+#' @param pctmin Minimum rate of focal and reference group that should be used for estimating the over ability difference between focal and groups after discarding cells with few respondents. 
 #'
 #' @return A matrix where each row corresponds to an item. The columns correspond to the following entries:
 #' \describe{
@@ -18,9 +18,10 @@
 #'   \item{Vars}{The estimation error of the weighted ability difference between the focal and reference groups.}
 #'   \item{N_R}{The number of respondents in the reference group.}
 #'   \item{N_F}{The number of respondents in the focal group.}
-#'   \item{NCell}{The number of cells for estimating the overall ability difference between the focal and reference groups.}
-#'   \item{p_value}{The p-value of the null hypothesis that the ability difference between the focal and reference
-#'   groups is 0.}
+#'   \item{NCell}{The initial number of cells for estimating the overall ability 
+#'   difference between the focal and reference groups.}
+#'   \item{p_value}{The p-value of the null hypothesis that the ability difference 
+#'   between the focal and reference groups is 0.}
 #'   }
 #'
 #'

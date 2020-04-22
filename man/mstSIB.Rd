@@ -23,11 +23,11 @@ mstSIB(
 
 \item{see}{A vector of the standard error of the ability estimates for each respondent.}
 
-\item{cellmin}{documentation missing}
+\item{cellmin}{Minimum number of respondents per cell for the focal and reference group. Cells with fewer respondents are discarded.}
 
-\item{pctmin}{documentation missing}
+\item{pctmin}{Minimum rate of focal and reference group that should be used for estimating the over ability difference between focal and groups after discarding cells with few respondents.}
 
-\item{NCell}{documentation missing}
+\item{NCell}{The initial number of cells for estimating the overall ability difference between the focal and reference groups.}
 }
 \value{
 A matrix where each row corresponds to an item. The columns correspond to the following entries:
@@ -36,9 +36,10 @@ A matrix where each row corresponds to an item. The columns correspond to the fo
   \item{Vars}{The estimation error of the weighted ability difference between the focal and reference groups.}
   \item{N_R}{The number of respondents in the reference group.}
   \item{N_F}{The number of respondents in the focal group.}
-  \item{NCell}{The number of cells for estimating the overall ability difference between the focal and reference groups.}
-  \item{p_value}{The p-value of the null hypothesis that the ability difference between the focal and reference
-  groups is 0.}
+  \item{NCell}{The initial number of cells for estimating the overall ability 
+  difference between the focal and reference groups.}
+  \item{p_value}{The p-value of the null hypothesis that the ability difference 
+  between the focal and reference groups is 0.}
   }
 }
 \description{
