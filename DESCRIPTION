@@ -26,3 +26,5 @@ LazyData: true
 RoxygenNote: 7.0.2
 NeedsCompilation: no
 Packaged: 2020-01-21 15:29:26 UTC; Rudolf Debelak
+Suggests: 
+    testthat
