@@ -30,7 +30,6 @@
 #'   Differs depending on the selection.}
 #' }
 #'
-#' @importFrom Rsctest bootstrap_sctest permutation_sctest
 #' @importFrom scDIFtest scDIFtest
 #' @importFrom stats coef
 #'

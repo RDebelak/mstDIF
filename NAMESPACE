@@ -2,10 +2,10 @@
 
 S3method(print,mstDIF)
 S3method(summary,mstDIF)
+export(bootstrap_sctest)
 export(log_reg)
 export(mstDIF)
 export(mstSIB)
-importFrom(Rsctest,bootstrap_sctest)
-importFrom(Rsctest,permutation_sctest)
+export(permutation_sctest)
 importFrom(scDIFtest,scDIFtest)
 importFrom(stats,coef)

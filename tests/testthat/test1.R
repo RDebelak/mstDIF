@@ -26,6 +26,10 @@ ppar <- eRm::person.parameter(RM)
 theta_est <- unlist(ppar$thetapar)
 see <- unlist(ppar$se.theta)
 
+mirt_obj <- mirt::multipleGroup(data = as.data.frame(resp), model=1, itemtype = "2PL", group = group,
+                                 invariance = c("free_means","free_var","slopes","intercepts"),
+                                 verbose=F)
+
 
 ### Testing
 ### Test 1: log_reg function
@@ -41,7 +45,7 @@ test_that("log_reg is working correctly", {
 test_that("mstSIB is working correctly", {
   test2 <- mstSIB(resp = as.data.frame(resp[sum_resp > 0 & sum_resp < i,]), theta = theta_est,
                   DIF_covariate = group[sum_resp > 0 & sum_resp < i], see = see)
-  
+
   expect_equal(round(test2$results$p_value[1],3), 0.956)
   expect_equal(round(test2$results$p_value[2],3), 0.71)
   expect_equal(round(test2$results$p_value[3],3), 0)
@@ -52,7 +56,7 @@ test_that("mstSIB is working correctly", {
 
 # test_that("Score-based permutation tests are working correctly", {
 #  test3 <- permutation_sctest(resp = resp, DIF_covariate = group, a = rep(1,times = i), b = beta, decorrelate = F)
-  
+
 #  expect_equal(round(test3$p[1],3), 0.441)
 #  expect_equal(round(test3$p[2],3), 0.643)
 #  expect_equal(round(test3$p[3],3), 0.054)
@@ -63,15 +67,12 @@ test_that("mstSIB is working correctly", {
 
 ### Test 5: Analytical score-based test - needs a mirt object
 test_that("Analytical score-based tests are working correctly", {
-  test5_obj <- mirt::multipleGroup(data = as.data.frame(resp), model=1, itemtype = "2PL", group = group,
-                             invariance = c("free_means","free_var","slopes","intercepts"),
-                             verbose=F)
-  test5 <- scDIFtest::scDIFtest(object = test5_obj, DIF_covariate = group)
+  test5 <- scDIFtest::scDIFtest(object = mirt_obj, DIF_covariate = group)
   expect_equal(round(summary(test5)$p_value[1],3), 0.561)
-  expect_equal(round(summary(test5)$p_value[2],3), 0.599) 
-  expect_equal(round(summary(test5)$p_value[3],3), 0.168) 
+  expect_equal(round(summary(test5)$p_value[2],3), 0.599)
+  expect_equal(round(summary(test5)$p_value[3],3), 0.168)
 })
-  
+
 ### Test 6: mstDIF function with logreg option
 test_that("log_reg option of mstDIF is working correctly", {
   test6 <- mstDIF(resp = as.data.frame(resp), DIF_covariate = group, method = "logreg", theta = theta)
@@ -86,7 +87,7 @@ test_that("mstSIB option of mstDIF is working correctly", {
   test7 <- mstDIF(resp = as.data.frame(resp[sum_resp > 0 & sum_resp < i,]),
                   DIF_covariate = group[sum_resp > 0 & sum_resp < i],
                   method = "mstsib", theta = theta_est, see=see)
-  
+
   expect_equal(round(test7$method_results$results$p_value[1],3), 0.956)
   expect_equal(round(test7$method_results$results$p_value[2],3), 0.71)
   expect_equal(round(test7$method_results$results$p_value[3],3), 0)
@@ -102,9 +103,9 @@ test_that("mstSIB option of mstDIF is working correctly", {
 
 ### Test 10: mstDIF function with analytical option
 test_that("Analytical option of mstDIF is working correctly", {
-  test10 <- mstDIF(object = test5_obj, DIF_covariate = group, method = "analytical")
-  
+  test10 <- mstDIF(object = mirt_obj, DIF_covariate = group, method = "analytical")
+
   expect_equal(round(summary(test10)$p_value[1],3), 0.007)
-  expect_equal(round(summary(test10)$p_value[2],3), 0.016) 
-  expect_equal(round(summary(test10)$p_value[3],3), 0.052) 
+  expect_equal(round(summary(test10)$p_value[2],3), 0.016)
+  expect_equal(round(summary(test10)$p_value[3],3), 0.052)
 })

@@ -13,17 +13,21 @@ Author: Rudolf Debelak [aut, cre],
     Mark J. Gierl [ctb]
 Maintainer: Rudolf Debelak <rudolf.debelak@psychologie.uzh.ch>
 Depends: R (>= 3.6.0)
-Imports: mirt (>= 1.31), 
-         Rsctest, 
-         scDIFtest, 
-         eRm
+Imports:  
+    expm,
+    Matrix,
+    PP,
+    mirt (>= 1.31),
+    scDIFtest, 
+    eRm,
+    strucchange
 Description: A Collection of Statistical Tests for the Detection of Differential
     Item Functioning (DIF) in Multistage Tests. Methods entail logistic regression,
     mstSIB, and various score-based tests.
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 NeedsCompilation: no
 Packaged: 2020-01-21 15:29:26 UTC; Rudolf Debelak
 Suggests: 
