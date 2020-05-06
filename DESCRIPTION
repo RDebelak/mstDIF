@@ -2,7 +2,7 @@ Package: mstDIF
 Type: Package
 Title: A Collection of Statistical Tests for DIF Detection in
         Multistage Tests
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(person(given = "Rudolf", family = "Debelak", role = c("aut", "cre"), email = "rudolf.debelak@psychologie.uzh.ch"),
              person(given = "Dries", family = "Debeer", role = "aut"),
              person(given = "Sebastian", family = "Appelbaum", role = "aut"),

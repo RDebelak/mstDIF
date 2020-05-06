@@ -38,13 +38,12 @@ factor <- factor(sample(1:3, size = nPerson, replace = TRUE))
 order <- ordered(sample(1:3, size = nPerson, replace = TRUE))
 
 # compute scores
-library(Rsctest)
-scores <- Rsctest:::get_scores(resp, a, b, c, theta,
+scores <- get_scores(resp, a, b, c, theta,
                      slope_intercept = FALSE, return_terms = TRUE)
 scores
 
 # compute process
-process <- apply(Rsctest:::scale_scores(scores$scores,
+process <- apply(scale_scores(scores$scores,
                                         decorrelate = TRUE)[order(metric),],
                  2, cumsum)
 process

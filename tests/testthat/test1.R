@@ -2,7 +2,6 @@
 library(mstDIF)
 library(eRm)
 library(scDIFtest)
-library(Rsctest)
 library(mirt)
 
 ###  Preparation
