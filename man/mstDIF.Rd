@@ -34,13 +34,16 @@ permutation test) and "analytical" (analytical score-based test)}
 
 \item{...}{additional, test-specific arguments}
 
-\item{theta}{documentation missing}
+\item{theta}{Estimates of the ability parameters}
 
-\item{see}{documentation missing}
+\item{see}{Estimates of the standard error of estimation.}
 
 \item{object}{A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.}
 
-\item{theta_method}{documentation missing}
+\item{theta_method}{Method for estimating the ability parameters if they 
+should be estimated based on the responses. The calculation is carried 
+out by the mirt package. Can be: "WLE" (default), 
+"MAP", "EAP", "ML", "EAPsum", "plausible", "classify"}
 }
 \value{
 A list with the following elements:

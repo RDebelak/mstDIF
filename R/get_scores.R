@@ -106,7 +106,7 @@ get_scores_from_terms <- function(resp, terms){
 }
 
 
-# function to scale/decorelate the scores (per impactGroup)
+# function to scale/decorrelate the scores (per impactGroup)
 scale_scores <- function(scores, meanCenter = TRUE, decorrelate = TRUE,
                          impact_groups = rep(1, dim(scores)[1])){
 
