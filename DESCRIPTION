@@ -11,9 +11,9 @@ Author: Rudolf Debelak [aut, cre],
     Dries Debeer [aut],
     Sebastian Appelbaum [aut],
     Mark J. Gierl [ctb]
-Maintainer: Rudolf Debelak <rudolf.debelak@psychologie.uzh.ch>
+Maintainer: Rudolf Debelak <rudolf.debelak@gmail.com>
 Depends: R (>= 3.6.0)
-Imports:  
+Imports: 
     expm,
     Matrix,
     PP,
@@ -31,4 +31,7 @@ RoxygenNote: 7.1.0
 NeedsCompilation: no
 Packaged: 2020-01-21 15:29:26 UTC; Rudolf Debelak
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
