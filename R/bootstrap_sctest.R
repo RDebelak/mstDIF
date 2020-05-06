@@ -9,6 +9,8 @@
 #' Only DIF with respect to the \code{a} and \code{b} parameters are tested for,
 #' respectively the item discriminations and the item difficulties.
 #'
+#' Author: Dries Debeer
+#'
 #' @param resp A matrix (or data frame) containing the responses, with the
 #' items in the columns.
 #' @param a A vector of item slopes/item discriminations.
@@ -70,7 +72,7 @@ bootstrap_sctest <- function(resp,
 
   # get call
   call <- match.call()
-  
+
   # The responses should be in a matrix
   stopifnot(is.matrix(resp) | is.data.frame(resp))
   if(is.data.frame(resp)) resp <- as.matrix(resp)
@@ -112,7 +114,7 @@ bootstrap_sctest <- function(resp,
   p <- get_pvalues(test_stats, bootstrapped_stats)
 
 
-  return(list(resp = resp, 
+  return(list(resp = resp,
               statistic = test_stats,
               p = p,
               nSamples = nSamples,
