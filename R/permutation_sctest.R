@@ -9,6 +9,8 @@
 #' Only DIF with respect to the \code{a} and \code{b} parameters are tested for,
 #' respectively the item discriminations and the item difficulties.
 #'
+#' Author: Dries Debeer
+#'
 #' @inheritParams bootstrap_sctest
 #'
 #' @return a list with four elements:
@@ -42,7 +44,7 @@ permutation_sctest <- function(resp,
 
   # get call
   call <- match.call()
-  
+
   # The responses should be in a matrix
   stopifnot(is.matrix(resp) | is.data.frame(resp))
   if(is.data.frame(resp)) resp <- as.matrix(resp)
@@ -80,7 +82,7 @@ permutation_sctest <- function(resp,
   p <- get_pvalues(test_stats, permuted_stats)
 
 
-  return(list(resp = resp, 
+  return(list(resp = resp,
               statistic = test_stats,
               p = p,
               nSamples = nSamples,

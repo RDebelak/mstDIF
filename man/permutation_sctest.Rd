@@ -88,6 +88,9 @@ functionality is limited to the 1-, 2-, and 3-parameter logistic models.
 Only DIF with respect to the \code{a} and \code{b} parameters are tested for,
 respectively the item discriminations and the item difficulties.
 }
+\details{
+Author: Dries Debeer
+}
 \seealso{
 \code{\link{bootstrap_sctest}}
 }

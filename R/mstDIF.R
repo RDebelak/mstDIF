@@ -5,7 +5,7 @@
 #' score-base tests, 4. a score-based Bootstrap test, 5. a score-based permutation test. The required input
 #' differs with regard to the selected DIF test.
 #'
-#' Author: Rudolf Debelak
+#' Author: Rudolf Debelak and Dries Debeer
 #'
 #' @param resp A data frame or matrix containing the response matrix. Rows correspond to respondents, columns to items.
 #' @param DIF_covariate A vector of ability estimates for each respondent.
