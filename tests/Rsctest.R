@@ -1,4 +1,5 @@
 set.seed(7485)
+library(mstDIF)
 
 # function to simulate 3PL data
 P3pl <- function(theta, a = rep(1, length(b)), b, c = rep(0, length(b)),
