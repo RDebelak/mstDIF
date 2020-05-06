@@ -65,7 +65,7 @@ score-base tests, 4. a score-based Bootstrap test, 5. a score-based permutation 
 differs with regard to the selected DIF test.
 }
 \details{
-Author: Rudolf Debelak
+Author: Rudolf Debelak and Dries Debeer
 }
 \section{Methods (by class)}{
 \itemize{

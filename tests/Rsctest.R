@@ -38,12 +38,12 @@ factor <- factor(sample(1:3, size = nPerson, replace = TRUE))
 order <- ordered(sample(1:3, size = nPerson, replace = TRUE))
 
 # compute scores
-scores <- get_scores(resp, a, b, c, theta,
+scores <- mstDIF:::get_scores(resp, a, b, c, theta,
                      slope_intercept = FALSE, return_terms = TRUE)
 scores
 
 # compute process
-process <- apply(scale_scores(scores$scores,
+process <- apply(mstDIF:::scale_scores(scores$scores,
                                         decorrelate = TRUE)[order(metric),],
                  2, cumsum)
 process
