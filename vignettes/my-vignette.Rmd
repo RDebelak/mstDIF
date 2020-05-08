@@ -1,0 +1,106 @@
+---
+title: "Testing for DIF with mstDIF"
+author: "Rudolf Debelak"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+### Introduction 
+mstDIF provides a collection of methods for the detection of differential item functioning (DIF) in multistage tests using an item response theory framework. It contains three types of methods. The first type is based on logistic regression, the second type is based on the mstSIB method, and the third type consists of a family of score-based DIF tests. In this brief tutorial, we illustrate the application of each method.
+
+### The first steps
+After the mstDIF package has been installed, we load it by the following command. Since we also need the eRm package for this demonstration, we also load it:
+```{r}
+library(mstDIF)
+library(eRm)
+```
+
+To illustrate the functions of this package, we use an artificial dataset from the eRm package. This dataset consists of 500 respondents that responded to 6 items. We will use the responses to the first five items as our response matrix and the responses to the last item as an indicator of whether a test taker is a member of the focal or of the reference group. For convenience, we also remove respondents who provided only positive or negative responses. The following commands lead to this setup.
+```{r}
+data(raschdat3)
+resp <- raschdat3[,-6]
+sum <- apply(resp, 1, sum)
+resp <- resp[sum > 0 & sum < 5,]
+group <- raschdat3[sum > 0 & sum < 5,6]
+```
+We now have a matrix resp, which contains the responses to our items, and a vector group. In group, 0 indicates that a respondent is a member of the reference group, and 1 that a respondent is a member of the focal group. We can easily check that the reference group is larger than the focal group:
+```{r}
+table(group)
+```
+We see that the focal group contains 120 respondents, whereas the reference group contains 332 respondents.
+
+We now use the Rasch model to describe the responses to the five items, and want to check whether the item parameters are stable between the focal and reference groups. We use the various methods of mstDIF for this purpose. We start by estimating the ability parameters using eRm. We first estimate the model parameters of the Rasch model using the RM command:
+```{r}
+raschmodel <- RM(resp)
+```
+In a second step, we estimate the person parameters and their standard error:
+```{r}
+theta_est <- unlist(person.parameter(raschmodel)$thetapar)
+see <- unlist(person.parameter(raschmodel)$se.theta)
+```
+Now theta_est is an estimate of the ability parameters, and see is an estimate of their standard errors. We are now ready to apply our first method in the next section.
+
+### The logistic regression DIF test
+Using the results from the previous section, we are now able to apply the logistic regression DIF test. We do this by the following command, where we also transform group into a categorical variable. The command uses three arguments: resp is a data frame which contains the response matrix (where rows correspond to respondents and columns to items), DIF_covariate is a factor which determines the membership to the focal and reference groups, and theta is a vector of ability parameter estimates for the respondents.
+```{r}
+test1 <- log_reg(resp = resp, DIF_covariate = factor(group), theta = theta_est)
+```
+This results in a list with 4 elements. The first three elements are simply the response matrix, the name of the variable used for defining the focal and reference groups, and the name of the test. The fourth elements contains the following table:
+```{r}
+test1[[4]]
+```
+This output can be read as follows: Each rows corresponds to an item, and each column to information on this item. From left to right, the presented information is:
+
+* The item number
+* The number of respondents answering this item.
+* The next three columns present the test statistic, the p-value and an effect size (Nagelkerke's R squared) for a test that checks the presence of an overall DIF effect.
+* The next three columns present the test statistic, the p-value and an effect size (Nagelkerke's R squared) for a test that checks the presence of an uniform DIF effect.
+* The next three columns present the test statistic, the p-value and an effect size (Nagelkerke's R squared) for a test that checks the presence of an non-uniform DIF effect.
+
+By inspecting the p-values in the fourth column, we see that there is no indication for an overall DIF effect, since all p-values are above 0.05. We therefore omit the remaining columns, which could help with indicating whether the found DIF effect is uniform or non-uniform.
+
+### The mstSIB test
+We carry out the second DIF test, which is the mstSIB procedure. The respective command requires four arguments. The first argument is the response matrix resp, the second argument DIF_covariate is a factor that indicates the membership to the focal and reference group, and the final two arguments are theta and see. Whereas theta contains estimates of the ability parameters, see contains the standard errors of the ability parameters. We run the second DIF test by running:
+```{r}
+test2 <- mstSIB(resp = resp, DIF_covariate = factor(group), theta = theta_est, see = see)
+```
+As the first test, the second test leads to a list of four elements, with the first three elements containing the response matrix, the value of the DIF_covariate and the name of the test. The fourth element is a data frame with the main results of the DIF test:
+```{r}
+test2[[4]]
+```
+Again the rows correspond to items and the columns to information about the items. From left to right, this information is as follows:
+
+* The test statistic for the item-wise DIF test
+* The standard error of the test statistic.
+* The size of the reference group.
+* The size of the focal group.
+* The number of cells used for comparing the response functions of the focal and reference groups.
+* The p-value of the DIF test.
+
+We see that the p-values of items 3 to 5 are below 0.05, indicating a DIF effect for these items. As can be seen, the DIF tests of mstSIB and logistic regression do not always agree in their results. We move on to the third DIF test, which is a score-based DIF test.
+
+### The Score-Based DIF test
+The final test is an analytical score-based DIF. This test uses the mstDIF command and can be applied to dRm objects which are generated by the RM command of eRm as well as SingleGroupObjects and MultiGroupObjects that can be generated with the mirt package. In its simplest version, it requires three arguments. The first argument is object, which is the object obtained from eRm or mirt. The second is DIF_covariate, which is again used as a person covariate that is used to test for DIF. In contrast to the logistic regression test and mstSIB, this argument can also be a metric variable. Finally, setting the third argument, method, to "analytical", determines that an analytical test is used.  
+```{r, eval = FALSE}
+test3 <- mstDIF(object = raschmodel, DIF_covariate = factor(group), method = "analytical")
+```
+Again, the output consists of a list of four elements, with the first three elements being the dataset, the variable used for DIF testing, and the test name. The p-values of the test are summarized in the fourth list of the list:
+```{r, eval = FALSE}
+test3[[4]]
+```
+
+
+### Additional DIF tests
+mstDIF further includes permutation and bootstrap DIF tests, which can be used when values for the item parameters, which could be obtained from previous studies, are available. Since such values are not available in our example dataset, we do not apply these tests here.
+
