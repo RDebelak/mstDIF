@@ -40,9 +40,9 @@ permutation test) and "analytical" (analytical score-based test)}
 
 \item{object}{A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.}
 
-\item{theta_method}{Method for estimating the ability parameters if they 
-should be estimated based on the responses. The calculation is carried 
-out by the mirt package. Can be: "WLE" (default), 
+\item{theta_method}{Method for estimating the ability parameters if they
+should be estimated based on the responses. The calculation is carried
+out by the mirt package. Can be: "WLE" (default),
 "MAP", "EAP", "ML", "EAPsum", "plausible", "classify"}
 }
 \value{

@@ -86,8 +86,8 @@ log_reg <- function(resp, DIF_covariate, theta = NULL){
                         stat_u = test_udif$Deviance[2],
                         p_value_u = test_udif$`Pr(>Chi)`[2],
                         eff_size_u = R2DIF2(glm_0, glm_1, N),
-                        stat_nu = test_dif$Deviance[2],
-                        p_value_nu = test_dif$`Pr(>Chi)`[2],
+                        stat_nu = test_cdif$Deviance[2],
+                        p_value_nu = test_cdif$`Pr(>Chi)`[2],
                         eff_size_nu = R2DIF2(glm_1, glm_2, N),
                         stringsAsFactors = FALSE))
 

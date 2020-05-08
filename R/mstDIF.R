@@ -15,9 +15,9 @@
 #' @param object A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.
 #' @param theta Estimates of the ability parameters
 #' @param see Estimates of the standard error of estimation.
-#' @param theta_method Method for estimating the ability parameters if they 
-#' should be estimated based on the responses. The calculation is carried 
-#' out by the mirt package. Can be: "WLE" (default), 
+#' @param theta_method Method for estimating the ability parameters if they
+#' should be estimated based on the responses. The calculation is carried
+#' out by the mirt package. Can be: "WLE" (default),
 #' "MAP", "EAP", "ML", "EAPsum", "plausible", "classify"
 #' @param ... additional, test-specific arguments
 #'
@@ -40,6 +40,7 @@
 mstDIF  <- function(resp, DIF_covariate, method, ...)
   UseMethod("mstDIF")
 
+#' @export
 #' @describeIn mstDIF Default mstDIF method
 mstDIF.default <- function(resp, DIF_covariate, method,
                            theta = NULL, see = NULL, ...){
@@ -158,6 +159,7 @@ mstDIF.default <- function(resp, DIF_covariate, method,
 
 
 #' @describeIn mstDIF mstDIF method for mirt-objects
+#' @export
 mstDIF.AllModelClass <- function(object, DIF_covariate, method,
                                  theta = NULL, see = NULL,
                                  theta_method = "WLE", ...){
@@ -220,6 +222,7 @@ mstDIF.AllModelClass <- function(object, DIF_covariate, method,
 }
 
 #' @describeIn mstDIF mstDIF method for dRm-objects
+#' @export
 mstDIF.dRm <- function(object, DIF_covariate, method,
                        theta = NULL, see = NULL, ...){
 

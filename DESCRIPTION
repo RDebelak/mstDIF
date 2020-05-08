@@ -21,6 +21,9 @@ Imports:
     scDIFtest, 
     eRm,
     strucchange
+Suggests: 
+    mvtnorm,
+    testthat
 Description: A Collection of Statistical Tests for the Detection of Differential
     Item Functioning (DIF) in Multistage Tests. Methods entail logistic regression,
     mstSIB, and various score-based tests.
@@ -30,5 +33,3 @@ LazyData: true
 RoxygenNote: 7.1.0
 NeedsCompilation: no
 Packaged: 2020-01-21 15:29:26 UTC; Rudolf Debelak
-Suggests: 
-    testthat
