@@ -37,13 +37,14 @@
 #' @importFrom stats coef
 #'
 #' @export
-mstDIF  <- function(resp, DIF_covariate, method, ...)
+mstDIF  <- function(resp, object, DIF_covariate, method, theta, see, theta_method, ...)
   UseMethod("mstDIF")
 
 #' @export
 #' @describeIn mstDIF Default mstDIF method
-mstDIF.default <- function(resp, DIF_covariate, method,
-                           theta = NULL, see = NULL, ...){
+mstDIF.default <- function(resp, object = NULL, DIF_covariate, method,
+                           theta = NULL, see = NULL,
+                           theta_method = NULL, ...){
   call <- match.call()
 
   nItem <- dim(resp)[2]
@@ -160,7 +161,7 @@ mstDIF.default <- function(resp, DIF_covariate, method,
 
 #' @describeIn mstDIF mstDIF method for mirt-objects
 #' @export
-mstDIF.AllModelClass <- function(object, DIF_covariate, method,
+mstDIF.AllModelClass <- function( resp = NULL, object, DIF_covariate, method,
                                  theta = NULL, see = NULL,
                                  theta_method = "WLE", ...){
 
@@ -223,8 +224,9 @@ mstDIF.AllModelClass <- function(object, DIF_covariate, method,
 
 #' @describeIn mstDIF mstDIF method for dRm-objects
 #' @export
-mstDIF.dRm <- function(object, DIF_covariate, method,
-                       theta = NULL, see = NULL, ...){
+mstDIF.dRm <- function(resp = NULL, object, DIF_covariate, method,
+                       theta = NULL, see = NULL,  
+                       theta_method = NULL, ...){
 
   call <- match.call()
   newCall <- call[-2]  # remove object argument

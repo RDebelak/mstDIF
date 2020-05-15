@@ -8,11 +8,21 @@
 \alias{mstDIF.dRm}
 \title{mstDIF: A Collection of Statistical Tests for DIF Detection in Multistage Tests}
 \usage{
-mstDIF(resp, DIF_covariate, method, ...)
+mstDIF(resp, object, DIF_covariate, method, theta, see, theta_method, ...)
 
-\method{mstDIF}{default}(resp, DIF_covariate, method, theta = NULL, see = NULL, ...)
+\method{mstDIF}{default}(
+  resp,
+  object = NULL,
+  DIF_covariate,
+  method,
+  theta = NULL,
+  see = NULL,
+  theta_method = NULL,
+  ...
+)
 
 \method{mstDIF}{AllModelClass}(
+  resp = NULL,
   object,
   DIF_covariate,
   method,
@@ -22,10 +32,21 @@ mstDIF(resp, DIF_covariate, method, ...)
   ...
 )
 
-\method{mstDIF}{dRm}(object, DIF_covariate, method, theta = NULL, see = NULL, ...)
+\method{mstDIF}{dRm}(
+  resp = NULL,
+  object,
+  DIF_covariate,
+  method,
+  theta = NULL,
+  see = NULL,
+  theta_method = NULL,
+  ...
+)
 }
 \arguments{
 \item{resp}{A data frame or matrix containing the response matrix. Rows correspond to respondents, columns to items.}
+
+\item{object}{A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.}
 
 \item{DIF_covariate}{A vector of ability estimates for each respondent.}
 
@@ -33,18 +54,16 @@ mstDIF(resp, DIF_covariate, method, ...)
 (Logistic regression), "mstsib" (mstSIB), "bootstrap" (score-based Bootstrap test), "permutation" (score-based)
 permutation test) and "analytical" (analytical score-based test)}
 
-\item{...}{additional, test-specific arguments}
-
 \item{theta}{Estimates of the ability parameters}
 
 \item{see}{Estimates of the standard error of estimation.}
-
-\item{object}{A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.}
 
 \item{theta_method}{Method for estimating the ability parameters if they
 should be estimated based on the responses. The calculation is carried
 out by the mirt package. Can be: "WLE" (default),
 "MAP", "EAP", "ML", "EAPsum", "plausible", "classify"}
+
+\item{...}{additional, test-specific arguments}
 }
 \value{
 A list with the following elements:
