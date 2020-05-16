@@ -37,7 +37,7 @@
 #' @importFrom stats coef
 #'
 #' @export
-mstDIF  <- function(resp, DIF_covariate, method, ...)
+mstDIF  <- function(..., DIF_covariate, method)
   UseMethod("mstDIF")
 
 #' @export

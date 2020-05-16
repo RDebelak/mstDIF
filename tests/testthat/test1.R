@@ -66,7 +66,7 @@ test_that("mstSIB is working correctly", {
 
 ### Test 5: Analytical score-based test - needs a mirt object
 test_that("Analytical score-based tests are working correctly", {
-  test5 <- scDIFtest::scDIFtest(object = mirt_obj, DIF_covariate = group)
+  test5 <- scDIFtest::scDIFtest(mirt_obj, DIF_covariate = group)
   expect_equal(round(summary(test5)$p_value[1],3), 0.561)
   expect_equal(round(summary(test5)$p_value[2],3), 0.599)
   expect_equal(round(summary(test5)$p_value[3],3), 0.168)
@@ -74,7 +74,7 @@ test_that("Analytical score-based tests are working correctly", {
 
 ### Test 6: mstDIF function with logreg option
 test_that("log_reg option of mstDIF is working correctly", {
-  test6 <- mstDIF(resp = as.data.frame(resp), DIF_covariate = group, method = "logreg", theta = theta)
+  test6 <- mstDIF(as.data.frame(resp), DIF_covariate = group, method = "logreg", theta = theta)
 
   expect_equal(round(test6$method_results$results[1,4],3), 0.646)
   expect_equal(round(test6$method_results$results[1,3],3), 0.875)
@@ -83,7 +83,7 @@ test_that("log_reg option of mstDIF is working correctly", {
 
 ### Test 7: mstDIF function with mstSIB option
 test_that("mstSIB option of mstDIF is working correctly", {
-  test7 <- mstDIF(resp = as.data.frame(resp[sum_resp > 0 & sum_resp < i,]),
+  test7 <- mstDIF(as.data.frame(resp[sum_resp > 0 & sum_resp < i,]),
                   DIF_covariate = group[sum_resp > 0 & sum_resp < i],
                   method = "mstsib", theta = theta_est, see=see)
 
@@ -102,7 +102,7 @@ test_that("mstSIB option of mstDIF is working correctly", {
 
 ### Test 10: mstDIF function with analytical option
 test_that("Analytical option of mstDIF is working correctly", {
-  test10 <- mstDIF(object = mirt_obj, DIF_covariate = group, method = "analytical")
+  test10 <- mstDIF(mirt_obj, DIF_covariate = group, method = "analytical")
 
   expect_equal(round(summary(test10)$p_value[1],3), 0.007)
   expect_equal(round(summary(test10)$p_value[2],3), 0.016)
