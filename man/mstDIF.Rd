@@ -76,3 +76,6 @@ Author: Rudolf Debelak and Dries Debeer
 \item \code{dRm}: mstDIF method for dRm-objects
 }}
 
+\seealso{
+\code{\link{mstDIF-Methods}}
+}

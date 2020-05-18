@@ -36,6 +36,8 @@
 #' @importFrom scDIFtest scDIFtest
 #' @importFrom stats coef
 #'
+#' @seealso \code{\link{mstDIF-Methods}}
+#'
 #' @export
 mstDIF  <- function(..., DIF_covariate, method)
   UseMethod("mstDIF")
@@ -170,7 +172,7 @@ mstDIF.AllModelClass <- function(object, DIF_covariate, method,
 
   if(method == "analytical") {
     newCall <- call[-4]  # remove method argument
-    newCall[[1]] <- quote(scDIFtest)
+    newCall[[1]] <- quote(scDIFtest::scDIFtest)
     newCall$item_selection <- NULL
     results <- eval(clean_call(newCall), envir = parent.frame())
     summary <- summary(results)
@@ -187,7 +189,6 @@ mstDIF.AllModelClass <- function(object, DIF_covariate, method,
       theta = theta,
       call = call,
       method_results = results)
-    class(out) <- "mstDIF"
     out
   } else {
     newCall <- call[-2]  # remove object argument
@@ -217,6 +218,7 @@ mstDIF.AllModelClass <- function(object, DIF_covariate, method,
     out <- eval(newCall)
     out$call <- call
   }
+  class(out) <- "mstDIF"
   return(out)
 
 }

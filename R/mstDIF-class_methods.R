@@ -68,7 +68,7 @@ summary.mstDIF <- function(object, DIF_type = "overall",
             call. = FALSE)
 
   col_names <- c("stat", "p_value")
-  if(object$method == "log-reg DIF-test") col_names <- c(col_names, "eff_size")
+  if(object$method == "DIF-test using Logistic Regression") col_names <- c(col_names, "eff_size")
 
   summary <- do.call(cbind, lapply(DIF_type[in_object], function(name){
     out <- object$DIF_test[[name]][col_names]
