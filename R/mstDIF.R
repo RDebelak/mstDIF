@@ -20,7 +20,7 @@
 #' "MAP", "EAP", "ML", "EAPsum", "plausible", "classify".
 #' @param ... Additional, test-specific arguments.
 #'
-#' @return A list with the following elements:
+#' @return An object of class \code{mstDIF}, which is a list with the following elements:
 #' \describe{
 #'   \item{\code{resp}}{The response matrix as a data frame.}
 #'   \item{\code{method}}{The used DIF detection method.}
@@ -261,8 +261,3 @@ mstDIF.dRm <- function(object, DIF_covariate, method,
 #' @export
 mstDIF  <- function(..., DIF_covariate, method)
   UseMethod("mstDIF")
-
-
-
-
-

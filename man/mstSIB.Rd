@@ -31,10 +31,8 @@ mstSIB(
 }
 \value{
 A list with four elements. The first element is the response matrix, the second element is the name of
-the DIF covariate, and the third element is the name of the test. The fourth element is a data frame where
-each row corresponds to an item. The columns of this data frame correspond to the following entries:
-
-A matrix where each row corresponds to an item. The columns
+the DIF covariate, and the third element is the name of the test. The fourth element is a matrix where each
+row corresponds to an item. The columns correspond to the following entries:
 \describe{
   \item{Beta}{The estimated weighted ability difference between the focal and reference groups.}
   \item{Vars}{The estimation error of the weighted ability difference between the focal and reference groups.}

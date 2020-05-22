@@ -42,7 +42,7 @@ out by the mirt package. Can be: "WLE" (default),
 "MAP", "EAP", "ML", "EAPsum", "plausible", "classify".}
 }
 \value{
-A list with the following elements:
+An object of class \code{mstDIF}, which is a list with the following elements:
 \describe{
   \item{\code{resp}}{The response matrix as a data frame.}
   \item{\code{method}}{The used DIF detection method.}
