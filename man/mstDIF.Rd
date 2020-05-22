@@ -9,9 +9,19 @@
 \usage{
 mstDIF(..., DIF_covariate, method)
 
-\method{mstDIF}{default}(resp, DIF_covariate, method, theta = NULL, see = NULL, ...)
+\method{mstDIF}{default}(
+  resp,
+  object = NULL,
+  DIF_covariate,
+  method,
+  theta = NULL,
+  see = NULL,
+  theta_method = NULL,
+  ...
+)
 
 \method{mstDIF}{AllModelClass}(
+  resp = NULL,
   object,
   DIF_covariate,
   method,
@@ -21,29 +31,38 @@ mstDIF(..., DIF_covariate, method)
   ...
 )
 
-\method{mstDIF}{dRm}(object, DIF_covariate, method, theta = NULL, see = NULL, ...)
+\method{mstDIF}{dRm}(
+  resp = NULL,
+  object,
+  DIF_covariate,
+  method,
+  theta = NULL,
+  see = NULL,
+  theta_method = NULL,
+  ...
+)
 }
 \arguments{
 \item{...}{additional, test-specific arguments}
+
+\item{object}{A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.}
 
 \item{DIF_covariate}{A vector of ability estimates for each respondent.}
 
 \item{method}{A character value indicating the DIF test that should be used. Possible values are "logreg"
 (Logistic regression), "mstsib" (mstSIB), "bootstrap" (score-based Bootstrap test), "permutation" (score-based)
 permutation test) and "analytical" (analytical score-based test)}
-
 \item{resp}{A data frame or matrix containing the response matrix. Rows correspond to respondents, columns to items.}
-
 \item{theta}{Estimates of the ability parameters}
 
 \item{see}{Estimates of the standard error of estimation.}
-
-\item{object}{A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.}
 
 \item{theta_method}{Method for estimating the ability parameters if they
 should be estimated based on the responses. The calculation is carried
 out by the mirt package. Can be: "WLE" (default),
 "MAP", "EAP", "ML", "EAPsum", "plausible", "classify"}
+
+\item{...}{additional, test-specific arguments}
 }
 \value{
 A list with the following elements:

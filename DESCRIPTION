@@ -3,8 +3,8 @@ Type: Package
 Title: A Collection of Statistical Tests for DIF Detection in
         Multistage Tests
 Version: 0.1.2
-Authors@R: c(person(given = "Rudolf", family = "Debelak", role = c("aut", "cre"), email = "rudolf.debelak@psychologie.uzh.ch"),
-             person(given = "Dries", family = "Debeer", role = c("aut"), email = "debeer.dries@gmail.com"),
+Authors@R: c(person(given = "Rudolf", family = "Debelak", role = c("aut", "cre"), email = "rudolf.debelak@gmail.com"),
+             person(given = "Dries", family = "Debeer", role = c("aut", "cre"), email = "debeer.dries@gmail.com"),
              person(given = "Sebastian", family = "Appelbaum", role = "aut"),
              person(given = "Mark J.", family = "Gierl", role = "ctb"))
 Author: Rudolf Debelak [aut, cre],
