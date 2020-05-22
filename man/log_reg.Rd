@@ -14,8 +14,8 @@ log_reg(resp, DIF_covariate, theta = NULL)
 \item{theta}{A vector of ability estimates for each respondent.}
 }
 \value{
-A list with four elements. The first element is the response matrix, the second element is the name of 
-the DIF covariate, and the third element is the name of the test. The fourth element is a data frame where 
+A list with four elements. The first element is the response matrix, the second element is the name of
+the DIF covariate, and the third element is the name of the test. The fourth element is a data frame where
 each row corresponds to an item. The columns of this data frame correspond to the following entries:
 \describe{
   \item{\code{N}}{The number of responses observed for this item.}
