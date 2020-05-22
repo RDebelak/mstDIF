@@ -15,7 +15,9 @@
 #' @param DIF_covariate A factor indicating the membership to the reference and focal groups.
 #' @param theta A vector of ability estimates for each respondent.
 #'
-#' @return A data frame where each row corresponds to an item. The columns correspond to the following entries:
+#' @return A list with four elements. The first element is the response matrix, the second element is the name of
+#' the DIF covariate, and the third element is the name of the test. The fourth element is a matrix where each
+#' row corresponds to an item. The columns correspond to the following entries:
 #' \describe{
 #'   \item{\code{N}}{The number of responses observed for this item.}
 #'   \item{\code{overall_chi_sq}}{The chi squared statistic of the likelihood ratio test comparing Model 2 and Model 0.}

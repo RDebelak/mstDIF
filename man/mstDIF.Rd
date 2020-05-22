@@ -7,8 +7,6 @@
 \alias{mstDIF.dRm}
 \title{A general function to detect differential item functioning (DIF) in multistage tests (MSTs)}
 \usage{
-mstDIF(..., DIF_covariate, method)
-
 \method{mstDIF}{default}(resp, DIF_covariate, method, theta = NULL, see = NULL, ...)
 
 \method{mstDIF}{AllModelClass}(
@@ -24,26 +22,24 @@ mstDIF(..., DIF_covariate, method)
 \method{mstDIF}{dRm}(object, DIF_covariate, method, theta = NULL, see = NULL, ...)
 }
 \arguments{
-\item{...}{additional, test-specific arguments}
+\item{resp, object}{A data frame or matrix containing the response matrix. Rows correspond to respondents, columns to items. Or an object of class SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm object as returned by the RM function in eRm.}
 
 \item{DIF_covariate}{A vector of ability estimates for each respondent.}
 
 \item{method}{A character value indicating the DIF test that should be used. Possible values are "logreg"
 (Logistic regression), "mstsib" (mstSIB), "bootstrap" (score-based Bootstrap test), "permutation" (score-based)
-permutation test) and "analytical" (analytical score-based test)}
+permutation test) and "analytical" (analytical score-based test).}
 
-\item{resp}{A data frame or matrix containing the response matrix. Rows correspond to respondents, columns to items.}
-
-\item{theta}{Estimates of the ability parameters}
+\item{theta}{Estimates of the ability parameters.}
 
 \item{see}{Estimates of the standard error of estimation.}
 
-\item{object}{A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.}
+\item{...}{Additional, test-specific arguments.}
 
 \item{theta_method}{Method for estimating the ability parameters if they
 should be estimated based on the responses. The calculation is carried
 out by the mirt package. Can be: "WLE" (default),
-"MAP", "EAP", "ML", "EAPsum", "plausible", "classify"}
+"MAP", "EAP", "ML", "EAPsum", "plausible", "classify".}
 }
 \value{
 A list with the following elements:

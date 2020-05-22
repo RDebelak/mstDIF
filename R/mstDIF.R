@@ -7,19 +7,18 @@
 #'
 #' Author: Rudolf Debelak and Dries Debeer
 #'
-#' @param resp A data frame or matrix containing the response matrix. Rows correspond to respondents, columns to items.
+#' @param resp,object A data frame or matrix containing the response matrix. Rows correspond to respondents, columns to items. Or an object of class SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm object as returned by the RM function in eRm.
 #' @param DIF_covariate A vector of ability estimates for each respondent.
 #' @param method A character value indicating the DIF test that should be used. Possible values are "logreg"
 #'  (Logistic regression), "mstsib" (mstSIB), "bootstrap" (score-based Bootstrap test), "permutation" (score-based)
-#'  permutation test) and "analytical" (analytical score-based test)
-#' @param object A SingleGroup-class or MultiGroup-class object as returned by mirt, or a dRm objcect as returned by the RM function in eRm.
-#' @param theta Estimates of the ability parameters
+#'  permutation test) and "analytical" (analytical score-based test).
+#' @param theta Estimates of the ability parameters.
 #' @param see Estimates of the standard error of estimation.
 #' @param theta_method Method for estimating the ability parameters if they
 #' should be estimated based on the responses. The calculation is carried
 #' out by the mirt package. Can be: "WLE" (default),
-#' "MAP", "EAP", "ML", "EAPsum", "plausible", "classify"
-#' @param ... additional, test-specific arguments
+#' "MAP", "EAP", "ML", "EAPsum", "plausible", "classify".
+#' @param ... Additional, test-specific arguments.
 #'
 #' @return A list with the following elements:
 #' \describe{
@@ -38,9 +37,8 @@
 #'
 #' @seealso \code{\link{mstDIF-Methods}}
 #'
-#' @export
-mstDIF  <- function(..., DIF_covariate, method)
-  UseMethod("mstDIF")
+#' @name mstDIF
+NULL
 
 #' @export
 #' @describeIn mstDIF Default mstDIF method
@@ -163,8 +161,7 @@ mstDIF.default <- function(resp, DIF_covariate, method,
 #' @describeIn mstDIF mstDIF method for mirt-objects
 #' @export
 mstDIF.AllModelClass <- function(object, DIF_covariate, method,
-                                 theta = NULL, see = NULL,
-                                 theta_method = "WLE", ...){
+                                 theta = NULL, see = NULL, theta_method =  "WLE", ...){
 
   call <- match.call()
   # get the data
@@ -259,6 +256,11 @@ mstDIF.dRm <- function(object, DIF_covariate, method,
   out$call <- call
   out
 }
+
+#'
+#' @export
+mstDIF  <- function(..., DIF_covariate, method)
+  UseMethod("mstDIF")
 
 
 

@@ -30,15 +30,19 @@ mstSIB(
 \item{NCell}{The initial number of cells for estimating the overall ability difference between the focal and reference groups.}
 }
 \value{
-A matrix where each row corresponds to an item. The columns correspond to the following entries:
+A list with four elements. The first element is the response matrix, the second element is the name of
+the DIF covariate, and the third element is the name of the test. The fourth element is a data frame where
+each row corresponds to an item. The columns of this data frame correspond to the following entries:
+
+A matrix where each row corresponds to an item. The columns
 \describe{
   \item{Beta}{The estimated weighted ability difference between the focal and reference groups.}
   \item{Vars}{The estimation error of the weighted ability difference between the focal and reference groups.}
   \item{N_R}{The number of respondents in the reference group.}
   \item{N_F}{The number of respondents in the focal group.}
-  \item{NCell}{The initial number of cells for estimating the overall ability 
+  \item{NCell}{The initial number of cells for estimating the overall ability
   difference between the focal and reference groups.}
-  \item{p_value}{The p-value of the null hypothesis that the ability difference 
+  \item{p_value}{The p-value of the null hypothesis that the ability difference
   between the focal and reference groups is 0.}
   }
 }
