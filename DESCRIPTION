@@ -8,8 +8,8 @@ Authors@R: c(person(given = "Rudolf", family = "Debelak", role = c("aut", "cre")
              person(given = "Sebastian", family = "Appelbaum", role = "aut"),
              person(given = "Mark J.", family = "Gierl", role = "ctb"))
 Author: Rudolf Debelak [aut, cre],
-    Dries Debeer [aut, cre],
-    Sebastian Appelbaum [aut],
+    Dries Debeer [aut],
+    Sebastian Appelbaum [ctb],
     Mark J. Gierl [ctb]
 Maintainer: Rudolf Debelak <rudolf.debelak@gmail.com>
 Depends: R (>= 3.6.0)
