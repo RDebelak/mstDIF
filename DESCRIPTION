@@ -2,7 +2,7 @@ Package: mstDIF
 Type: Package
 Title: A Collection of Statistical Tests for DIF Detection in
         Multistage Tests
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: c(person(given = "Rudolf", family = "Debelak", role = c("aut", "cre"), email = "rudolf.debelak@gmail.com"),
              person(given = "Dries", family = "Debeer", role = c("aut"), email = "debeer.dries@gmail.com"),
              person(given = "Sebastian", family = "Appelbaum", role = "aut"),
@@ -18,7 +18,7 @@ Imports:
     Matrix,
     PP,
     mirt (>= 1.31),
-    scDIFtest, 
+    scDIFtest,
     eRm,
     strucchange
 Suggests:
