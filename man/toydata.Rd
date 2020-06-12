@@ -15,8 +15,10 @@ A list with 7 elements:
   the distribution was N(-1,1).}
   \item{theta}{The true ability parameters.}
   \item{theta_est}{The ability parameters estimated by the WLE estimator.}
-  \item{group}{A simulated person covariate. The first 500 respondents belong to group 0, the remaining 500
+  \item{group_categ}{A simulated categorical person covariate. The first 500 respondents belong to group 0, the remaining 500
   respondents to group 1.}
+  \item{group_cont}{A simulated continuous person covariate. It simulates an age covariate, with a uniform distribution between
+  20 and 60.}
   \item{see_est}{The standard errors of the estimated ability parameters.}
 }
 }
