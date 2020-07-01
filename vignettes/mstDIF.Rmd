@@ -39,7 +39,7 @@ it <- toydata$it
 theta_est <- toydata$theta_est
 see_est <- toydata$see_est
 ```
-The matrix resp contains the response matrix, with 0 corresponding to incorrect and 1 corresponding to correct responses. Missing responses are denoted by NA. group_categ is a vector that indicates an artifical person covariate. 0 indicates that a respondent is a member of the reference group, and 1 that a respondent is a member of the focal group. group_cont is a continuous person covariate, which takes on integer values between 20 and 60; this variable aims at simulating an age variable. it contains a matrix with the item parameters, where the first column corresponds to the discrimination parameters and the second column to the difficulty parameters of the 35 items used in this test. theta_est and see_est are the estimated ability parameters and their standard errors for the individual test takers, respectively.
+The matrix resp contains the response matrix, with 0 corresponding to incorrect and 1 corresponding to correct responses. Missing responses are denoted by NA. group_categ is a vector that indicates an artificial person covariate. 0 indicates that a respondent is a member of the reference group, and 1 that a respondent is a member of the focal group. group_cont is a continuous person covariate, which takes on integer values between 20 and 60; this variable aims at simulating an age variable. it contains a matrix with the item parameters, where the first column corresponds to the discrimination parameters and the second column to the difficulty parameters of the 35 items used in this test. theta_est and see_est are the estimated ability parameters and their standard errors for the individual test takers, respectively.
 
 We want to check whether the item parameters are stable between the focal and reference groups. We use the various methods of mstDIF for this purpose. We are now ready to apply our first method in the next section.
 
@@ -62,7 +62,7 @@ For instance, when we want the information form all the tests, we can use:
 ```{r}
 summary(log_reg_DIF, DIF_type = "all")
 ```
-This output can be read as follows: Each rows corresponds to an item, and each column to information on this item. Items with a lower p-value are presented first. Focussing on the global DIF tests, the following information is given:
+This output can be read as follows: Each rows corresponds to an item, and each column to information on this item. Items with a lower p-value are presented first. Focusing on the global DIF tests, the following information is given:
 
 * `overall_stat` the test statistic
 * `overall_p_value` the $p$-value
@@ -71,7 +71,7 @@ This output can be read as follows: Each rows corresponds to an item, and each c
 
 Note that most DIF tests only contain a global test per item, and effect sizes are only available for the logistic regression method in the current version of mstDIF.
 
-By inspecting the p-values in the second column, we see that there is an indication for an overall DIF effect in three items, which are labeled as Item_8, Item_33 and Item_30. In these three items, the p-values are below 0.05. However, the effect sizes are very small. An inspectation of the columns uniform_p_value and non-uniform_p_value would indicate that the DIF effect of items 8 and 33 is overall uniform, while it is rather non-uniform for item 30. However, given the large size of the item set, these effects could also be random fluctuations in the sample and therefore false positive. We could either a) correct for multiple testing or b) form hypotheses which items we would like to test for DIF.
+By inspecting the p-values in the second column, we see that there is an indication for an overall DIF effect in three items, which are labeled as Item_8, Item_33 and Item_30. In these three items, the p-values are below 0.05. However, the effect sizes are very small. An inspection of the columns uniform_p_value and non-uniform_p_value would indicate that the DIF effect of items 8 and 33 is overall uniform, while it is rather non-uniform for item 30. However, given the large size of the item set, these effects could also be random fluctuations in the sample and therefore false positive. We could either a) correct for multiple testing or b) form hypotheses which items we would like to test for DIF.
  
 ### The mstSIB test
 We carry out the second DIF test, which is the mstSIB procedure. The respective command requires four arguments. The first argument is the response matrix resp, the second argument DIF_covariate is a factor that indicates the membership to the focal and reference group, and the final two arguments are theta and see. Whereas theta contains estimates of the ability parameters, see contains the standard errors of the ability parameters. We run the second DIF test by running:

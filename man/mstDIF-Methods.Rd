@@ -17,7 +17,7 @@ is done for all items.}
 
 \item{ordered}{logical: should the summary be ordered according to the obtained p-values (in ascending order)?}
 
-\item{...}{other argements passed to the method.}
+\item{...}{other arguments passed to the method.}
 }
 \description{
 \code{print} and \code{summary}methods for objects of the

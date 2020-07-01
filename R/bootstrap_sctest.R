@@ -20,20 +20,20 @@
 #' (the default) which leads to the ability parameters being estimated.
 #' @param DIF_covariate A list with the person covariate(s) to test for as
 #' element(s).
-#' @param parameters A charachter string, either "per_item", "ab", "a", or "b",
+#' @param parameters A character string, either "per_item", "ab", "a", or "b",
 #' to specify which parameters should be tested for.
-#' @param item_selection A character vector with the colum names or an integer
-#' vector with the colum numbers in the \code{resp}, specifying the items for
+#' @param item_selection A character vector with the column names or an integer
+#' vector with the column numbers in the \code{resp}, specifying the items for
 #' which the test should be computed. When set to NULL (i.t., the default),
 #' all the items are tested.
 #' @param nSamples An integer value with the number of permutations to be
 #' sampled.
-#' @param theta_method A charachter string, either "wle", "mle", "eap", of
+#' @param theta_method A character string, either "wle", "mle", "eap", of
 #' "map" that specifies the estimator for the ability estimation. Only
 #' relevant when \code{theta == NULL}.
 #' @param slope_intercept A logical value indicating whether the slope-intercept
 #' formulation of the 2-/3-PL model should be used.
-#' @param statistic A charachter string, either "auto", "DM", "CvM",
+#' @param statistic A character string, either "auto", "DM", "CvM",
 #' "maxLM", "LMuo", "WDMo", or "maxLMo", specifying the test statistic to be used.
 #' @param meanCenter A logical value: should the score contributions be mean
 #' centered per parameter?
@@ -47,7 +47,7 @@
 #'   \item{\code{p}}{A matrix containing the obtained \emph{p}-values.}
 #'   \item{\code{nSamples}}{The number of samples taken.}
 #'   \item{\code{DIF_covariate}}{A list containing all the covariate(s) used to order
-#'    the score contirbutions, as well as the used test statistics.}
+#'    the score contributions, as well as the used test statistics.}
 #' }
 #' @aliases bootstrap_sctest
 #' @seealso \code{\link{permutation_sctest}}

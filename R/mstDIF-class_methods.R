@@ -25,7 +25,7 @@
 #' @param DIF_type a string that should one or more of "overall", "uniform",
 #'    "non-uniform", "all".
 #' @param ordered logical: should the summary be ordered according to the obtained p-values (in ascending order)?
-#' @param ... other argements passed to the method.
+#' @param ... other arguments passed to the method.
 #'
 #'
 #

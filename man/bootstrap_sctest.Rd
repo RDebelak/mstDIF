@@ -38,25 +38,25 @@ items in the columns.}
 \item{DIF_covariate}{A list with the person covariate(s) to test for as
 element(s).}
 
-\item{parameters}{A charachter string, either "per_item", "ab", "a", or "b",
+\item{parameters}{A character string, either "per_item", "ab", "a", or "b",
 to specify which parameters should be tested for.}
 
-\item{item_selection}{A character vector with the colum names or an integer
-vector with the colum numbers in the \code{resp}, specifying the items for
+\item{item_selection}{A character vector with the column names or an integer
+vector with the column numbers in the \code{resp}, specifying the items for
 which the test should be computed. When set to NULL (i.t., the default),
 all the items are tested.}
 
 \item{nSamples}{An integer value with the number of permutations to be
 sampled.}
 
-\item{theta_method}{A charachter string, either "wle", "mle", "eap", of
+\item{theta_method}{A character string, either "wle", "mle", "eap", of
 "map" that specifies the estimator for the ability estimation. Only
 relevant when \code{theta == NULL}.}
 
 \item{slope_intercept}{A logical value indicating whether the slope-intercept
 formulation of the 2-/3-PL model should be used.}
 
-\item{statistic}{A charachter string, either "auto", "DM", "CvM",
+\item{statistic}{A character string, either "auto", "DM", "CvM",
 "maxLM", "LMuo", "WDMo", or "maxLMo", specifying the test statistic to be used.}
 
 \item{meanCenter}{A logical value: should the score contributions be mean
@@ -75,7 +75,7 @@ a list with four elements:
   \item{\code{p}}{A matrix containing the obtained \emph{p}-values.}
   \item{\code{nSamples}}{The number of samples taken.}
   \item{\code{DIF_covariate}}{A list containing all the covariate(s) used to order
-   the score contirbutions, as well as the used test statistics.}
+   the score contributions, as well as the used test statistics.}
 }
 }
 \description{

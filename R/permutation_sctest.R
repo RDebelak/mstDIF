@@ -19,7 +19,7 @@
 #'   \item{\code{p}}{A matrix containing the obtained \emph{p}-values.}
 #'   \item{\code{nSamples}}{The number of samples taken.}
 #'   \item{\code{DIF_covariate}}{A list containing all the covariate(s) used to order
-#'    the score contirbutions, as well as the used test statistics.}
+#'    the score contributions, as well as the used test statistics.}
 #' }
 #' @aliases permutation_sctest
 #' @seealso \code{\link{bootstrap_sctest}}
