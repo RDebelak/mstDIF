@@ -13,6 +13,7 @@ This is the first submission to CRAN.
 - New submission
 - DIF is the common abbreviation for Differential Item Functioning.
 - mstSIB is the name of a method for DIF detection.
+- There was an error under the oldrel version with linux xenial because a dependency was not available.
 
 ## Downstream dependencies
 
