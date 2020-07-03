@@ -6,7 +6,7 @@ This is a resubmission to CRAN. In this version I have:
 ## Test environments
 * local Windows 10 x64 (build 18363), R version 4.0.0 (2020-04-24), x86_64-w64-mingw32/x64 (64-bit)
 * OS X (on travis-ci), release
-* linux xenial (on travis-ci), oldrel, release, devel
+* linux xenial (on travis-ci), release, devel
 * windows (on AppVeyor), release
 
 ## R CMD check results
@@ -15,7 +15,6 @@ This is a resubmission to CRAN. In this version I have:
 - New submission
 - DIF is the common abbreviation for Differential Item Functioning.
 - mstSIB is the name of a method for DIF detection.
-- There was an error under the oldrel version with linux xenial because a dependency was not available.
 
 ## Downstream dependencies
 

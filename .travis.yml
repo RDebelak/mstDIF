@@ -5,7 +5,6 @@ sudo: true
 cache: packages
 
 r:
-  - oldrel
   - release
   - devel
 
@@ -16,8 +15,6 @@ os:
 matrix:
  exclude:
     - r:  devel
-      os: osx
-    - r:  oldrel
       os: osx
 
 r_packages:
