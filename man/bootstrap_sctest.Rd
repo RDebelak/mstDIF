@@ -2,7 +2,7 @@
 % Please edit documentation in R/bootstrap_sctest.R
 \name{bootstrap_sctest}
 \alias{bootstrap_sctest}
-\title{A score-based DIF test using the parameteric bootstrap approach.}
+\title{A score-based DIF test using the parametric bootstrap approach.}
 \usage{
 bootstrap_sctest(
   resp,
