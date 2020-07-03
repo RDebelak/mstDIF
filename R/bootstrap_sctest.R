@@ -1,4 +1,4 @@
-#' A score-based DIF test using the parameteric bootstrap approach.
+#' A score-based DIF test using the parametric bootstrap approach.
 #'
 #' \code{bootstrap_sctest} computes score test to detect DIF in multiple
 #' item/parameters with respect to multiple person covariates (\code{DIF_covariate}).
