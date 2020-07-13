@@ -26,6 +26,14 @@
 #'   between the focal and reference groups is 0.}
 #'   }
 #'
+#' @examples 
+#' data("toydata")
+#' resp <- toydata$resp
+#' group_categ <- toydata$group_categ
+#' theta_est <- toydata$theta_est
+#' see_est <- toydata$see_est
+#' mstSIB(resp = as.data.frame(resp), theta = theta_est,
+#' DIF_covariate = group_categ, see = see_est)
 #'
 #' @export
 

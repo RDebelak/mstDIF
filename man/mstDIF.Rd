@@ -72,6 +72,23 @@ Author: Rudolf Debelak and Dries Debeer
 \item \code{dRm}: mstDIF method for dRm-objects
 }}
 
+\examples{
+data("toydata")
+resp <- toydata$resp
+group_categ <- toydata$group_categ
+theta_est <- toydata$theta_est
+see_est <- toydata$see_est
+
+res1 <- mstDIF(resp, DIF_covariate = factor(group_categ), method = "logreg",
+theta = theta_est)
+
+res2 <- mstDIF(resp, DIF_covariate = factor(group_categ), method = "mstsib",
+theta = theta_est, see = see_est)
+
+summary(res1)
+summary(res2)
+
+}
 \seealso{
 \code{\link{mstDIF-Methods}}
 }

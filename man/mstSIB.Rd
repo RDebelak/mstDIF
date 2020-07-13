@@ -50,3 +50,13 @@ This function allows the detection of itemwise DIF using the mstSIB test.
 \details{
 Author: Mark J. Gierl, with minor changes by Rudolf Debelak and Dries Debeer
 }
+\examples{
+data("toydata")
+resp <- toydata$resp
+group_categ <- toydata$group_categ
+theta_est <- toydata$theta_est
+see_est <- toydata$see_est
+mstSIB(resp = as.data.frame(resp), theta = theta_est,
+DIF_covariate = group_categ, see = see_est)
+
+}

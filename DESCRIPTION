@@ -1,8 +1,7 @@
 Package: mstDIF
 Type: Package
-Title: A Collection of Statistical Tests for DIF Detection in
-        Multistage Tests
-Version: 0.1.4
+Title: A Collection of DIF Tests for Multistage Tests
+Version: 0.1.5
 Authors@R: c(person(given = "Rudolf", family = "Debelak", role = c("aut", "cre"), email = "rudolf.debelak@gmail.com"),
              person(given = "Dries", family = "Debeer", role = c("aut"), email = "debeer.dries@gmail.com"),
              person(given = "Sebastian", family = "Appelbaum", role = "ctb"),
@@ -26,9 +25,12 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
-Description: A Collection of Statistical Tests for the Detection of Differential
-    Item Functioning (DIF) in Multistage Tests. Methods entail logistic regression,
-    mstSIB, and various score-based tests.
+Description: A Collection of statistical tests for the detection of differential
+    item functioning (DIF) in multistage tests. Methods entail logistic regression,
+    an adaptation of the simultaneous item bias test (SIBTEST), and various score-based tests.
+    The presented tests provide itemwise checks that item response curves remain stable with 
+    regard to categorical, ordinal or metric covariates. Methods for uniform and non-uniform 
+    DIF effects are available.
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true

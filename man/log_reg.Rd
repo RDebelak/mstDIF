@@ -44,3 +44,12 @@ based on two criteria: The comparison of the Nagelkerke R squared values, and th
 \details{
 Author: Sebastian Appelbaum, with minor changes by Rudolf Debelak and Dries Debeer
 }
+\examples{
+data("toydata")
+resp <- toydata$resp
+group_categ <- toydata$group_categ
+theta_est <- toydata$theta_est
+log_reg(resp, DIF_covariate = factor(group_categ), theta = theta_est)
+
+
+}
