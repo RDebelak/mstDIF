@@ -1,0 +1,30 @@
+Package: mstDIF
+Type: Package
+Title: A Collection of DIF Tests for Multistage Tests
+Version: 0.1.5
+Authors@R: c(person(given = "Rudolf", family = "Debelak", role = c("aut", "cre"), email = "rudolf.debelak@gmail.com"),
+             person(given = "Dries", family = "Debeer", role = c("aut"), email = "debeer.dries@gmail.com"),
+             person(given = "Sebastian", family = "Appelbaum", role = "ctb"),
+             person(given = "Mark J.", family = "Gierl", role = "ctb"))
+Author: Rudolf Debelak [aut, cre],
+    Dries Debeer [aut],
+    Sebastian Appelbaum [ctb],
+    Mark J. Gierl [ctb]
+Maintainer: Rudolf Debelak <rudolf.debelak@gmail.com>
+Depends: R (>= 4.0.0)
+Imports: expm, Matrix, PP, mirt (>= 1.31), scDIFtest, eRm, strucchange
+Suggests: mvtnorm, testthat, knitr, rmarkdown
+Description: A Collection of statistical tests for the detection of differential
+    item functioning (DIF) in multistage tests. Methods entail logistic regression,
+    an adaptation of the simultaneous item bias test (SIBTEST), and various score-based tests.
+    The presented tests provide itemwise checks that item response curves remain stable with 
+    regard to categorical, ordinal or metric covariates. Methods for uniform and non-uniform 
+    DIF effects are available.
+License: GPL-2 | GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+NeedsCompilation: no
+Packaged: 2020-07-13 14:14:14 UTC; rdebelak
+VignetteBuilder: knitr
+Built: R 4.0.2; ; 2020-07-13 14:16:55 UTC; windows
