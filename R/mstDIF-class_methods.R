@@ -19,22 +19,36 @@
 #'
 #' @param x an object of class \code{mstDIF}
 #' @param object an object of class \code{mstDIF}
-#' @param item_selection either \code{NULL} or an integer vector selecting the
-#'         item numbers. When \code{items = NULL} (the default), the DIF test
-#'         is done for all items.
 #' @param DIF_type a string that should one or more of "overall", "uniform",
 #'    "non-uniform", "all".
 #' @param ordered logical: should the summary be ordered according to the obtained p-values (in ascending order)?
 #' @param ... other arguments passed to the method.
 #'
+#' @examples
 #'
-#
+#' ## load data
+#' data("toydata")
+#'
+#' ## fit 2PL model using mirt
+#' mirt_model <- mirt::mirt(toydata$resp, model = 1)
+#'
+#' ## test DIF along a contiuous covariate
+#' DIFtest <- mstDIF(mirt_model, DIF_covariate = toydata$group_cont,
+#' method = "analytical")
+#'
+#' ## print
+#' DIFtest
+#'
+#' ## summary
+#' summary(DIFtest)
+#'
+#'
 #' @name mstDIF-Methods
 NULL
-#' @rdname scDIFtest-Methods
+#' @rdname mstDIF-Methods
 #' @aliases print.mstDIF
 #' @export
-print.mstDIF <- function(x, item_selection = NULL, ...){
+print.mstDIF <- function(x, ...){
   cat("    Differential Item Functioning (DIF) Detection Test \n",
       "\tMethod: \t", x$method, "\n",
       "\tTest: \t \t", x$test, "\n",
@@ -45,8 +59,8 @@ print.mstDIF <- function(x, item_selection = NULL, ...){
 
 }
 
-#' @rdname scDIFtest-Methods
-#' @aliases summary.scDIFtest
+#' @rdname mstDIF-Methods
+#' @aliases summary.mstDIF
 #' @export
 summary.mstDIF <- function(object, DIF_type = "overall",
                            ordered = TRUE, ...){

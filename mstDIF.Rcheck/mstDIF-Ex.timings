@@ -1,6 +1,0 @@
-name	user	system	elapsed
-bootstrap_sctest	11.44	 0.76	12.20	
-log_reg	0.50	0.08	0.58	
-mstDIF	0.50	0.01	0.51	
-mstSIB	0.13	0.11	0.24	
-permutation_sctest	4.45	0.35	4.80	

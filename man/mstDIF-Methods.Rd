@@ -2,22 +2,25 @@
 % Please edit documentation in R/mstDIF-class_methods.R
 \name{mstDIF-Methods}
 \alias{mstDIF-Methods}
+\alias{print.mstDIF}
+\alias{summary.mstDIF}
 \title{Methods for the mstDIF-class}
+\usage{
+\method{print}{mstDIF}(x, ...)
+
+\method{summary}{mstDIF}(object, DIF_type = "overall", ordered = TRUE, ...)
+}
 \arguments{
 \item{x}{an object of class \code{mstDIF}}
 
-\item{object}{an object of class \code{mstDIF}}
+\item{...}{other arguments passed to the method.}
 
-\item{item_selection}{either \code{NULL} or an integer vector selecting the
-item numbers. When \code{items = NULL} (the default), the DIF test
-is done for all items.}
+\item{object}{an object of class \code{mstDIF}}
 
 \item{DIF_type}{a string that should one or more of "overall", "uniform",
 "non-uniform", "all".}
 
 \item{ordered}{logical: should the summary be ordered according to the obtained p-values (in ascending order)?}
-
-\item{...}{other arguments passed to the method.}
 }
 \description{
 \code{print} and \code{summary}methods for objects of the
@@ -36,4 +39,24 @@ that was included in the test. The columns are:
      \item{p_value}{The p-value per item}
      \item{eff_size}{An effect-size for the DIF-test, if applicable}
    }
+}
+\examples{
+
+## load data
+data("toydata")
+
+## fit 2PL model using mirt
+mirt_model <- mirt::mirt(toydata$resp, model = 1)
+
+## test DIF along a contiuous covariate
+DIFtest <- mstDIF(mirt_model, DIF_covariate = toydata$group_cont,
+method = "analytical")
+
+## print
+DIFtest
+
+## summary
+summary(DIFtest)
+
+
 }
