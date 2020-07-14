@@ -92,13 +92,14 @@ respectively the item discriminations and the item difficulties.
 Author: Dries Debeer
 }
 \examples{
+\donttest{
 data("toydata")
 resp <- toydata$resp
 group_categ <- toydata$group_categ
 it <- toydata$it
 discr <- it[,1]
 diff <- it[,2]
-\donttest{
+
 permutation_sctest(resp = resp, DIF_covariate = group_categ, a = discr, b = diff, 
 decorrelate = FALSE)
 }
