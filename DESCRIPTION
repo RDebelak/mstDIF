@@ -28,9 +28,8 @@ Suggests:
 Description: A Collection of statistical tests for the detection of differential
     item functioning (DIF) in multistage tests. Methods entail logistic regression,
     an adaptation of the simultaneous item bias test (SIBTEST), and various score-based tests.
-    The presented tests provide itemwise checks that item response curves remain stable with 
-    regard to categorical, ordinal or metric covariates. Methods for uniform and non-uniform 
-    DIF effects are available.
+    The presented tests provide itemwise test for DIF along categorical, ordinal or metric covariates. Methods for uniform and non-uniform 
+    DIF effects are available depending on which method is used.
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
