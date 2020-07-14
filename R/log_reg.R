@@ -32,6 +32,13 @@
 #'   \item{\code{CDIF_Delta_NagelkerkeR2}}{The difference of the Nagelkerke R squared values for Model 2 and Model 1.}
 #' }
 #'
+#' @examples 
+#' data("toydata")
+#' resp <- toydata$resp
+#' group_categ <- toydata$group_categ
+#' theta_est <- toydata$theta_est
+#' log_reg(resp, DIF_covariate = factor(group_categ), theta = theta_est)
+#'
 #'
 #' @export
 log_reg <- function(resp, DIF_covariate, theta = NULL){

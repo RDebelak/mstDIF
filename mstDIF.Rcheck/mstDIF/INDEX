@@ -1,0 +1,13 @@
+bootstrap_sctest        A score-based DIF test using the parametric
+                        bootstrap approach.
+log_reg                 A logistic regression DIF test for MSTs
+mstDIF                  A general function to detect differential item
+                        functioning (DIF) in multistage tests (MSTs)
+mstDIF-Methods          Methods for the mstDIF-class
+mstDIF-package          mstDIF: A Collection of Statistical Tests for
+                        DIF Detection in Multistage Tests
+mstSIB                  The mstSIB test for MSTs
+permutation_sctest      A score-based DIF test using the permutation
+                        approach.
+toydata                 A Toy Example of 1000 Respondents Working on a
+                        Multistage Test

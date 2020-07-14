@@ -1,0 +1,11 @@
+mstDIF-package	mstDIF-package
+bootstrap_sctest	bootstrap_sctest
+log_reg	log_reg
+mstDIF	mstDIF
+mstDIF-Methods	mstDIF-Methods
+mstDIF.AllModelClass	mstDIF
+mstDIF.default	mstDIF
+mstDIF.dRm	mstDIF
+mstSIB	mstSIB
+permutation_sctest	permutation_sctest
+toydata	toydata

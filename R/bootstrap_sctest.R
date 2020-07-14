@@ -1,4 +1,4 @@
-#' A score-based DIF test using the parameteric bootstrap approach.
+#' A score-based DIF test using the parametric bootstrap approach.
 #'
 #' \code{bootstrap_sctest} computes score test to detect DIF in multiple
 #' item/parameters with respect to multiple person covariates (\code{DIF_covariate}).
@@ -51,6 +51,19 @@
 #' }
 #' @aliases bootstrap_sctest
 #' @seealso \code{\link{permutation_sctest}}
+#'
+#' @examples 
+#' \donttest{
+#' data("toydata")
+#' resp <- toydata$resp
+#' group_categ <- toydata$group_categ
+#' it <- toydata$it
+#' discr <- it[,1]
+#' diff <- it[,2]
+#' 
+#' bootstrap_sctest(resp = resp, DIF_covariate = group_categ, a = discr, b = diff, 
+#' decorrelate = FALSE)
+#' }
 #'
 #' @export
 bootstrap_sctest <- function(resp,
