@@ -25,7 +25,7 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
-Description: A Collection of statistical tests for the detection of differential
+Description: A collection of statistical tests for the detection of differential
     item functioning (DIF) in multistage tests. Methods entail logistic regression,
     an adaptation of the simultaneous item bias test (SIBTEST), and various score-based tests.
     The presented tests provide itemwise test for DIF along categorical, ordinal or metric covariates. Methods for uniform and non-uniform 
