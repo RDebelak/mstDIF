@@ -17,7 +17,7 @@ This is a resubmission to CRAN. In this version I have:
 ## R CMD check results
 0 errors | 0 warnings | 0 notes
 
-- This is the first resubmission.
+- This is the first submission to CRAN.
 - Comments on possible misspellings: DIF is the common abbreviation for Differential Item Functioning.
 - SIBTEST is the name of a method for DIF detection.
 
