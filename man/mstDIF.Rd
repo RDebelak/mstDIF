@@ -89,7 +89,7 @@ res1
 summary(res1)
 
 ## test DIF along a categorical covariate (a factor) using the
-## logistic regression method#'
+## mstSIB method
 res2 <- mstDIF(resp, DIF_covariate = factor(group_categ), method = "mstsib",
 theta = theta_est, see = see_est)
 res2
