@@ -11,15 +11,14 @@ Author: Rudolf Debelak [aut, cre],
     Sebastian Appelbaum [ctb],
     Mark J. Gierl [ctb]
 Maintainer: Rudolf Debelak <rudolf.debelak@gmail.com>
-Depends: R (>= 4.0.0)
+Depends: R (>= 3.6.0)
 Imports: 
     expm,
     Matrix,
     PP,
     mirt (>= 1.31),
     scDIFtest,
-    eRm,
-    strucchange
+    eRm
 Suggests:
     mvtnorm,
     testthat,
