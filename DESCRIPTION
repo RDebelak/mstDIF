@@ -23,7 +23,8 @@ Suggests:
     mvtnorm,
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    strucchange
 Description: A collection of statistical tests for the detection of differential
     item functioning (DIF) in multistage tests. Methods entail logistic regression,
     an adaptation of the simultaneous item bias test (SIBTEST), and various score-based tests.
