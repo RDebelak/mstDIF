@@ -1,3 +1,3 @@
-# mstDIF 0.1.5
+# mstDIF 0.1.6
 
-First CRAN release.
+Removed dependency on strucchange and automatic tests for functions in the scDIFtest package

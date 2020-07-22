@@ -1,7 +1,7 @@
 Package: mstDIF
 Type: Package
 Title: A Collection of DIF Tests for Multistage Tests
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: c(person(given = "Rudolf", family = "Debelak", role = c("aut", "cre"), email = "rudolf.debelak@gmail.com"),
              person(given = "Dries", family = "Debeer", role = c("aut"), email = "debeer.dries@gmail.com"),
              person(given = "Sebastian", family = "Appelbaum", role = "ctb"),
@@ -11,7 +11,7 @@ Author: Rudolf Debelak [aut, cre],
     Sebastian Appelbaum [ctb],
     Mark J. Gierl [ctb]
 Maintainer: Rudolf Debelak <rudolf.debelak@gmail.com>
-Depends: R (>= 3.6.0)
+Depends: R (>= 4.0.0)
 Imports: 
     expm,
     Matrix,
