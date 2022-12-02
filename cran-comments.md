@@ -1,13 +1,8 @@
 ## Resubmission
-This is a resubmission to CRAN to address issues found by the CRAN team after the publication of the previous version. In this version I have:
-* Removed an automatic test in the test1.R file that pertained to a function in the scDIFtest package: scDIFtest::scDIFtest(). This function is already tested in the scDIFtest package, and does not require testing in the mstDIF package.
-* Removed strucchange from the Imports list in DESCRIPTION, since this is not necessary.
-* Included the flavors r-devel-linux-x86_64-fedora-gcc, r-devel-linux-x86_64-fedora-clang and r-patched-solaris-x86,
-which had led to notes or errors in checks by the CRAN team, as additional test environments.
-* Since this package can only be installed with R version 4.0.0 or higher, I did not address an reported error with the oldrel version under OS X - it is to be expected that the package cannot be installed there.
+This is a resubmission to CRAN that corrects minor text errors and also includes a reference to a publication evaluating the underlying tests.
 
 ## Test environments
-* local Windows 10 x64 (build 18363), R version 4.0.2 (2020-06-22), x86_64-w64-mingw32/x64 (64-bit)
+* local Windows 10 x64 (build 18363), R version 4.2.1 (2022-06-23 ucrt) , x86_64-w64-mingw32/x64 (64-bit)
 * OS X (on travis-ci), release
 * linux xenial (on travis-ci), release, devel
 * linux fedora gcc and clang (on R-hub), devel

@@ -6,11 +6,6 @@ Authors@R: c(person(given = "Rudolf", family = "Debelak", role = c("aut", "cre")
              person(given = "Dries", family = "Debeer", role = c("aut"), email = "debeer.dries@gmail.com"),
              person(given = "Sebastian", family = "Appelbaum", role = "ctb"),
              person(given = "Mark J.", family = "Gierl", role = "ctb"))
-Author: Rudolf Debelak [aut, cre] (<https://orcid.org/0000-0001-8900-2106>),
-    Dries Debeer [aut],
-    Sebastian Appelbaum [ctb],
-    Mark J. Gierl [ctb]
-Maintainer: Rudolf Debelak <rudolf.debelak@gmail.com>
 Depends: R (>= 4.0.0)
 Imports: 
     expm,

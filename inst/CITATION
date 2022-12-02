@@ -22,6 +22,6 @@ bibentry(bibtype = "Article",
          volume  = "3",
          number  = "4",
          pages   = "618-638",
-         doi     = "https://doi.org/10.3390/psych3040040",
+         doi     = "10.3390/psych3040040",
          header  = "To describe score-based tests for continuous variables in multistage tests, cite"
 )
